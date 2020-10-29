@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualification</title>
+    <link rel="stylesheet" href="https://e2eresearch.com/swteam/McKinsey/Assessment-app/qualification.css">
+    <link rel="stylesheet" href="./dist/css/qualification.css">
+    <link rel="stylesheet" href="https://e2eresearch.com/swteam/McKinsey/Assessment-app/OverlayScrollbars.css">
+</head>
+<body>
+    <span style="display: none;" id="jsonData">
+        {
+            "heading":"Qualification",
+            "logo":"https://e2eresearch.com/swteam/McKinsey_digital_20-20/AQ/browser_check/mck-logo.svg",
+            "title":"Contact Center Walkthrough",
+            "banner":"https://e2eresearch.com/swteam/McKinsey/Assessment-app/intro-banner.png",
+            "frdBtnTxt":"Next",
+            "footerLogo":"https://e2eresearch.com/swteam/McKinsey/Assessment-app/mck-logo-footer.png",
+            "footerContent":"© 1996-2019 McKinsey & Company",
+            "Error":"Please select all fields",
+            "inputFields":[
+            {
+                "label":"Industry",                
+                "placeholder":"Select Industry",
+                "inputType":"select",
+                "selectedId":"",
+                "options":[
+                    {
+                        "optionId":"a11",
+                        "optionTxt":"Industry option 1"
+                    },
+                    {
+                        "optionId":"a12",
+                        "optionTxt":"Industry option 2"
+                    },
+                    {
+                        "optionId":"a13",
+                        "optionTxt":"Industry option 3"
+                    },
+                    {
+                        "optionId":"a14",
+                        "optionTxt":"Industry option 4"
+                    }
+                ]
+            },
+            {
+                "label":"Country of CC Location",                
+                "placeholder":"Select Country",
+                "inputType":"select",
+                "selectedId":"",
+                "options":[
+                    {
+                        "optionId":"a21",
+                        "optionTxt":"Country option 1"
+                    },
+                    {
+                        "optionId":"a22",
+                        "optionTxt":"Country option 2"
+                    },
+                    {
+                        "optionId":"a23",
+                        "optionTxt":"Country option 3"
+                    },
+                    {
+                        "optionId":"a24",
+                        "optionTxt":"Country option 4"
+                    }
+                ]
+            },
+            {
+                "label":"Size of CC",
+                "inputId":"a3",
+                "placeholder":"Enter Number",
+                "inputType":"text" , 
+                "inputVal":"This is prewritten value"              
+            },
+            {
+                "label":"Country of Client HQ",                
+                "placeholder":"Select Country",
+                "inputType":"select",
+                "selectedId":"a51",
+                "options":[
+                    {
+                        "optionId":"a51",
+                        "optionTxt":"Country option 1"
+                    },
+                    {
+                        "optionId":"a52",
+                        "optionTxt":"Country option 2"
+                    },
+                    {
+                        "optionId":"a53",
+                        "optionTxt":"Country option 3"
+                    },
+                    {
+                        "optionId":"a54",
+                        "optionTxt":"Country option 4"
+                    }
+                ]
+            },
+            {
+                "label":"Internal of External CC",                
+                "placeholder":"Select Option",
+                "inputType":"select",
+                "selectedId":"",
+                "options":[
+                    {
+                        "optionId":"a71",
+                        "optionTxt":"Country option 1"
+                    },
+                    {
+                        "optionId":"a72",
+                        "optionTxt":"Country option 2"
+                    },
+                    {
+                        "optionId":"a73",
+                        "optionTxt":"Country option 3"
+                    },
+                    {
+                        "optionId":"a74",
+                        "optionTxt":"Country option 4"
+                    }
+                ]
+            }
+            
+            ]
+        }
+    </span>
+
+    <div id="main-wrapper">
+        <header-large :json-data="jsondata"></header-large>
+        <qualification :json-data="jsondata"></qualification>
+        <intro-footer :json-data="jsondata"></intro-footer>
+    </div>  
+
+    <input type="submit" style="display: none;" id="forwardbutton" name="__fwd" tabindex="9998" class="navbutton confirmit-nav" onclick=" if(typeof wix=='object') {wix.nav(event, 'p1862356818');} " value="  >>  "></div>
+
+    <div style="position:fixed;top:0px; color:white;background:blue">
+
+        <input type="radio" id="a11" name="a11" value="male">
+        <label for="a11">Industry option 1</label><br>
+        <input type="radio" id="a12" name="a12" value="female">
+        <label for="a12">Industry option 2</label><br>
+        <input type="radio" id="a13" name="a13" value="other">
+        <label for="a13">Industry option 3</label>
+        <input type="radio" id="a14" name="a14" value="other">
+        <label for="a14">Industry option 4</label>
+
+    </br>
+
+    <input type="radio" id="a21" name="a21" value="male">
+        <label for="a21">Country option 1</label><br>
+        <input type="radio" id="a22" name="a22" value="female">
+        <label for="a22">Country option 2</label><br>
+        <input type="radio" id="a23" name="a23" value="other">
+        <label for="a23">Country option 3</label>
+        <input type="radio" id="a24" name="a24" value="other">
+        <label for="a24">Country option 4</label>
+
+</br>
+
+<input type="text" id="a3" />
+    
+    </div>
+  
+    
+
+
+    <script src="https://e2eresearch.com/swteam/McKinsey/Assessment-app/vue.js"></script>
+    <script src="https://e2eresearch.com/swteam/McKinsey/Assessment-app/OverlayScrollbars.min.js"></script>
+    <script src="./dist/js/production/qualification.js"></script>
+</body>
+</html>

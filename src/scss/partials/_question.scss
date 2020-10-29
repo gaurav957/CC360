@@ -1,0 +1,354 @@
+.right-panel-wrapper{
+    width:100%;
+    padding: 110px 30px 0px;
+    height: calc(100vh - 94px);
+  @media (max-width:1024px){
+    padding: 95px 15px 0px;
+    height: calc(100vh - 96px);
+  }
+}
+
+.progress-panel{
+    width:100%;
+    .progress{
+        width:calc(100% - 335px);
+        float:left;
+        margin-top: 12px;
+        .perc-data{
+            width:200px;
+            display: inline-block;
+            @media (max-width:1024px){
+                width: 100%;
+                display: block;
+                margin-bottom: 10px;
+            } 
+        }
+        .progress-bar{
+            width:calc(80% - 200px);
+            display: inline-block;
+            @media (max-width:1024px){
+                width: 100%;
+                display: block;
+            } 
+        }
+        #myProgress{
+            height:10px;
+            width:100%;
+            background-color: $f7-clr;
+        }
+        #myBar{
+            height:10px;
+            width:0px;
+            background-color: $ff52-clr; //variable
+        }
+       @media (max-width:1024px){
+            width: 100%;
+            float: none;
+        } 
+    }
+
+   
+    .progress-panel-inner {
+        border-bottom: 1px solid $light-gray;
+        padding-bottom: 20px;
+
+    }
+}
+
+.tooltip {  
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: inline-block;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 0.75em;
+    color: $light-blue;
+    margin-left: 5px;
+    display: inline-block;
+    cursor: pointer;
+   @include border-radius(50px);
+       .tooltiptext {
+        visibility: hidden;
+        width: 160px;
+        background-color: $black;
+        color: $white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 5px;
+        position: absolute;
+        z-index: 1;
+        top: 150%;
+        left: -50%;
+        margin-left: -60px;
+        @media (max-width:767px){
+            left: 0;
+            margin-left: -120px;
+        }
+        
+        &::after {
+            content: "";
+            position: absolute;
+            transform: rotate(180deg);
+            top: -12px;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 6px; 
+            border-style: solid;
+            border-color: $black transparent transparent transparent;
+            @media (max-width:767px){
+                top: -12px;
+                right: 24px;
+                margin-left: 44px;
+            }
+          }
+      }
+      &:hover{
+        .tooltiptext {
+            @media (min-width:1025px){
+                visibility: visible;
+            }
+            
+          }
+      }
+      .custom-infoicon{
+          width: 20px;
+          height: 20px;
+          display: block;
+          background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNC4zLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA2NCA2NCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNjQgNjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiMwRDM3RDY7fQ0KPC9zdHlsZT4NCjxwYXRoIGlkPSJfQ29tcG91bmRfUGF0aF8iIGNsYXNzPSJzdDAiIGQ9Ik02NCwzMkM2NCwxNC4zLDQ5LjcsMCwzMiwwUzAsMTQuMywwLDMyczE0LjMsMzIsMzIsMzJTNjQsNDkuNyw2NCwzMnogTTU4LjQsMzINCgljMCwxNC42LTExLjgsMjYuNC0yNi40LDI2LjRTNS42LDQ2LjYsNS42LDMyQzUuNiwxNy40LDE3LjQsNS42LDMyLDUuNmwwLDBDNDYuNiw1LjYsNTguNCwxNy40LDU4LjQsMzJ6Ii8+DQo8cmVjdCB4PSIyOC41IiB5PSIxMi4yIiBjbGFzcz0ic3QwIiB3aWR0aD0iNyIgaGVpZ2h0PSI3Ii8+DQo8cG9seWdvbiBjbGFzcz0ic3QwIiBwb2ludHM9IjM1LjUsNDQuNCAzNS41LDMwLjkgMzUuNSwyMy45IDI4LjksMjMuOSAyNS42LDIzLjkgMjUuNiwzMC45IDI4LjksMzAuOSAyOC45LDQ0LjQgMjUuNiw0NC40IA0KCTI1LjYsNTEuMyAyOC45LDUxLjMgMzUuNSw1MS4zIDM4LjMsNTEuMyAzOC4zLDQ0LjQgIi8+DQo8L3N2Zz4NCg==');
+          background-size: 100%;
+      }
+      &.tooltip-show{
+          .tooltiptext{
+              @media (max-width:1024px){
+                visibility: visible;
+              }
+          
+          }
+      }
+  }
+  .accordion {
+    background-color: $ee-clr;
+    color: $drak-gray;    
+    padding: 6px 15px;
+    margin: 0;
+    font-weight: normal;
+    border: 1px solid $ee-clr;
+    cursor: pointer;
+    font-size: 1.25em;
+   position: relative;
+   @media (max-width:767px){
+    font-size: 0.90em;
+   }
+}
+.accordian-inner {
+    margin-bottom: 20px;
+    .accordion-resize{
+        padding: 25px 15px;
+    }
+}
+.active, .accordion{
+    &:hover{
+        background-color: $f6-clr;
+        color: $black;   
+            
+    }
+    &::after{
+        content: '\002B';
+        color: $bl47-clr;
+        font-size: 1.25em;
+        font-weight: bold;       
+        top: 2px;
+        right: 15px;
+        position: absolute;
+    }
+}
+.active{
+    &::after {
+        content: "\2212";
+        color: $bl47-clr;
+        font-size: 1.25em;
+    }
+}
+.accordion-panel {
+    overflow: hidden;
+    max-height: 0;
+    @include transition(max-height 0.5s linear);
+      .survey-title {
+        color: $drak-gray;
+        font-weight: bold;       
+        padding-bottom: 10px;
+        border-bottom: 1px solid $d3-clr;
+        margin-bottom: 20px;
+        font-size: 1em;
+        @media (max-width:767px){
+            font-size: 0.90em;
+        }
+       &:empty{
+display: none;
+       }
+    }
+    .survey-info-messg {
+        color:$drak-gray;
+        font-size: 1em;
+    }
+}
+ 
+ .survey-wrapper {
+    padding-top: 20px;    
+    // max-height: calc(100vh - 355px);
+   
+  //  height: calc(100vh - 300px);
+     .scrollable{
+        padding-right: 25px;
+        height: calc(100vh - 340px);
+        overflow-y: auto;
+     }
+} 
+ 
+.accordion.active + .accordion-panel {
+    max-height: inherit;    
+    
+}
+.question-resize{
+    margin-bottom: 40px;
+    .survey-info {
+        margin-bottom: 20px;
+        .survey-info-messg{
+            color: $drak-gray;
+            font-weight: bold;
+            font-size: 0.95em;            
+            @media (min-width:1025px){
+                float: left;
+                width: 25%;
+            }
+            @media (max-width:767px){
+                font-size: 0.90em;
+            }       
+        }
+       .instruct-info{
+            color:$drak-gray;
+            font-size: 1em;
+            position: relative;
+            @media (min-width:1025px){
+               padding-left:45px;
+               float: left;
+               width: 75%;
+               &:before{
+                   content: '';
+                   position: absolute;
+                   left: 10px;
+                   top: 7px;
+                   width: 20px;
+                   height: 5px;
+                   border-radius: 4px;
+                   background-color:$drak-gray;
+               }
+            }  
+            @media (max-width:767px){
+                font-size: 0.90em;
+            }  
+            &:empty{
+                display: none;
+            }
+       }
+    }
+}
+
+
+.survey-card{
+    @include box-shadow(5px, 5px, 5px, rgba(0,0,0, 0));
+    // @include transition(box-shadow 0.2s ease, z-index 0s 0.2s ease, transform 0.2s ease, background 0.3s linear);
+    border: 1px solid $e6-clr;   
+    &:hover{
+        cursor: pointer;   
+        .s-crad-header{
+            color: $white;
+            background: $selectd-hdr-lt;            
+        }     
+        .s-crad-body{
+            color: $white;
+            background: $selectd-lt;
+        }
+    }
+    // &:hover{
+    //     @include box-shadow(0px, 8px, 50px, rgba(55, 96, 246, 0.3));
+    //     @include scale(1.05)
+    // }
+}
+.survey-type{
+    position: relative;
+    .s-crad-header {
+        padding: 20px 15px;
+        font-size: 1em;
+        font-weight: bold;
+        background: $e1-clr;
+        text-align: center;
+        color: $btn-border;
+        @media (max-width:767px){
+            font-size: 0.90em;
+        }        
+    }
+    .s-crad-body {
+        padding: 15px;
+        background:$f7-clr;
+        color: $drak-gray;
+        min-height: 230px;
+        font-size: 0.87em;
+        line-height: 20px;       
+    }
+   .survey-type-overlay{
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 2;
+   }
+}
+.survey-info {
+    margin-bottom: 15px;
+}
+.other-type-row {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    .other-quest {
+        color: $btn-border;
+        font-size: 1em;
+        font-weight: 500;
+        padding-bottom: 15px;
+        &:empty{
+            padding-bottom: 0px;
+        }
+        @media (max-width:767px){
+            font-size: 0.90em;
+        }
+    }
+    .other-form-ctrl{
+        width: 100%;
+        border: 1px solid $input-bor;
+        height: 44px;
+        padding: 15px;
+        font-size: 1em;
+        color: $btn-border;
+        @include box-shadow(0, 1PX, 1PX,  rgba(0,0,0,.075), inset);       
+        @include transition(border-color .15s ease-in-out, box-shadow .15s ease-in-out);
+        &:focus{
+            outline: none;
+            border-color: $lt-blue; 
+            @include box-shadow(0, 0, 8px, rgba(102,175,233,.6));
+        }
+    }
+}
+
+.selectedsurvey{   
+    .s-crad-header{
+        background:$selectd-hdr;
+        color: $white;
+    }
+   .s-crad-body {
+        background:#2251FF;
+        color: $white;
+    }   
+}
+

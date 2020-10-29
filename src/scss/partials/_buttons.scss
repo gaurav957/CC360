@@ -1,0 +1,92 @@
+
+
+
+%btn-property {
+  width: 152px;
+  display: inline-block;
+  padding:12px 0;
+  text-align: center;      
+  cursor: pointer;
+  font-size: 1em;
+  @include transition(background-color 0.5s linear, color 0.5s linear);
+  @media (max-width:1024px){
+    width: 130px;
+    padding: 7px 4px
+
+  }
+  @media (max-width:767px){
+    font-size: 0.90em;
+    
+  }
+}
+.btn-item{
+  @extend %btn-property;
+  &.save{  
+      color:#2A2A2A;
+      border: 1px solid $btn-border;
+      margin-right: 10px;     
+     &:not(.disable):hover{       
+      background-color: $bg-color;
+      color: $white;
+     }      
+   }
+   &.submit{
+ background-color: $bg-d9;
+ color: #333333;
+ border:1px solid $btn-br-primary;
+ &:not(.disable):hover{   
+  background-color: $light-black;
+  color: $white;
+ }
+  }
+  &.pre{
+    color: $selectd;
+    border: 1px solid $selectd;
+    margin-right: 10px;
+    &:not(.disable):hover{
+      background-color:$selectd;
+      color: $white;
+    }
+  }
+  &.frw{
+    color: $selectd;
+    background-color:$selectd; 
+    border: 1px solid $selectd;
+    color: $white;
+    &:not(.disable):hover{
+      background-color: $fd-47;
+    }
+  }
+ 
+}
+
+.survey-begin{
+  position: fixed;
+    bottom: 35px;
+    width: 100%;
+    left: 0;
+    @media (max-width:1024px){
+      bottom: 47px;
+    }
+
+}
+
+// .btn-item {
+ 
+//     &.save{
+//         border:1px solid #000;
+//         color:$drak-gray;
+//         background-color: transparent;
+//     }
+
+//     &.prev{
+//         border:1px solid #fff;
+//         color:#fff;
+//         background-color: transparent;
+//     }
+
+//     &.submit{
+//         color:#333;
+//         background-color: $bg-d9;
+//     }
+// }

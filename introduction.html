@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction</title>
+    <link rel="stylesheet" href="./dist/css/dashboard.css">
+    <link rel="stylesheet" href="./dist/css/OverlayScrollbars.css">
+
+</head>
+<body>
+    <span id="jsonData" style="display: none;">
+    {
+        "logo":"https://e2eresearch.com/swteam/McKinsey/Assessment-app/mck-logo.svg",
+        "title":"Contact Center Walkthrough",
+        "heading":"Intorduction",
+        "banner":"https://e2eresearch.com/swteam/McKinsey/Assessment-app/intro-banner.png",
+        "frdBtnTxt":"Start",
+        "footerLogo":"https://e2eresearch.com/swteam/McKinsey/Assessment-app/mck-logo-footer.png",
+        "footerContent":"© 1996-2019 McKinsey & Company",        
+        "content":"<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br/><br/>Enim, doloribus mollitia error rem fuga molestiae, tenetur sequi rerum libero accusamus iste, aliquid aperiam quo harum nobis nam nesciunt asperiores distinctio.<p><br/><br/><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat reiciendis rem eos quibusdam! Maiores voluptatibus, placeat architecto voluptatem doloribus quo, non sunt id, consequuntur autem maxime excepturi natus? Voluptas, quod?</p>"
+    }    
+    </span>
+
+    <div id="main-wrapper">
+        <header-large :json-data="jsonData"></header-large>
+        <intro-content :json-data="jsonData"></intro-content>
+        <intro-footer :json-data="jsonData"></intro-footer>
+    </div>
+    
+    <input type="submit" id="forwardbutton" style="display: none;" name="__fwd" tabindex="9998" class="navbutton confirmit-nav" onclick=" if(typeof wix=='object') {wix.nav(event, 'p1862356818');} " value="  >>  "></div>
+
+    <script src="./dist/js/vendor/vue.js"></script>
+    <script src="./dist/js/production/OverlayScrollbars.min.js"></script>
+    <script src="./dist/js/production/introduction.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+         

@@ -1,0 +1,96 @@
+{
+    "headerData": {
+        "logo": "https://e2eresearch.com/swteam/McKinsey_digital_20-20/AQ/browser_check/mck-logo.svg",
+        "headerTitle": "Analytics Quotient/Agile360"
+    },
+    
+    "tablesData":[{
+        "type":"over",
+        "headingTxt":"CC WalkThrough Overview",
+        "avgTxt":"Average",
+        "youTxt":"You",
+        "theadTxt":["Categories","Assessment criteria","1-2-3-4","key observations (Example)"],
+        "trow":[{
+            "cat":"Strategy",
+            "cri":[
+                {
+                    "subcri":"Strategic Clarity",
+                    "avgVal":"4",
+                    "youVal":"3",
+                    "keyOb":"The levers are clearly..."
+                }
+            ]
+        },
+        {
+            "cat":"Organization",
+            "cri":[
+                {
+                    "subcri":"Processes",
+                    "avgVal":"4",
+                    "youVal":"3",
+                    "keyOb":"Process are defined"
+                },
+                {
+                    "subcri":"Processes",
+                    "avgVal":"4",
+                    "youVal":"3",
+                    "keyOb":"Process are defined"
+                }
+            ]
+        }],
+        "last-line":"1) Significant potential...",
+        "kTA":"This is key take away"
+
+        },
+        {
+            "type":"dd",
+            "headingTxt":"Deep dive",
+            "mda":"Must do actions",
+            "avgTxt":"Average",
+            "youTxt":"You",
+            "theadTxt":["Categories","Assessment criteria","1-2-3-4","key observations (Example)","Recommended action(s)"],
+            "trow":[{
+                "cat":"Strategy",
+                "cri":[
+                    {
+                        "subcri":"Strategic Clarity",
+                        "avgVal":"4",
+                        "youVal":"3",
+                        "keyOb":"The levers are clearly...",
+                        "ra":"These are recommended actions"
+                    },
+                    {
+                        "subcri":"Strategic Clarity",
+                        "avgVal":"4",
+                        "youVal":"3",
+                        "keyOb":"The levers are clearly...",
+                        "ra":"These are recommended actions"
+                    }
+                ]
+            },
+            {
+                "cat":"Strategy",
+                "cri":[
+                    {
+                        "subcri":"Strategic Clarity",
+                        "avgVal":"4",
+                        "youVal":"3",
+                        "keyOb":"The levers are clearly...",
+                        "ra":"These are recommended actions"
+                    },
+                    {
+                        "subcri":"Strategic Clarity",
+                        "avgVal":"4",
+                        "youVal":"3",
+                        "keyOb":"The levers are clearly...",
+                        "ra":"These are recommended actions"
+                    }
+                ]
+            }],
+            
+            "last-line":"1) Significant potential..."
+    
+            }]
+
+
+}

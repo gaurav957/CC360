@@ -1,0 +1,29 @@
+@import 'partials/variables';
+@import './partials/mixin';
+@import './partials/base64';
+@import 'partials/common';
+@import 'partials/buttons';
+@import './partials/header';
+@import 'partials/all.min';
+
+.thankyou-banner{
+    text-align: center;
+    .img{
+        @extend %result;
+        width: 200px;
+        height: 190px;
+        margin: 0 auto;
+        background-size: 100% 100%;
+    }
+}
+
+.thankyou-content{
+    margin:40px auto 30px;
+    h3,h2,h4{
+        font-weight: 500;
+    }
+    p{
+        font-size: 1em;
+    }
+}
+ 

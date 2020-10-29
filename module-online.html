@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module</title>
+    <link rel="stylesheet" type="text/css" href="https://e2eresearch.com/swteam/McKinsey/Assessment-app/module.css">
+    <link rel="stylesheet" href="https://e2eresearch.com/swteam/McKinsey/Assessment-app/OverlayScrollbars.css">
+</head>
+<body>
+
+    <span style="display: none;" id="jsonData">
+        {
+            "logo":"https://e2eresearch.com/swteam/McKinsey/Assessment-app/mck-logo.svg",
+            "title":"Contact Center Walkthrough",
+            "banner":"https://e2eresearch.com/swteam/McKinsey/Assessment-app/intro-banner.png",
+            "heading":"Select Module",
+            "frdBtnTxt":"Start",
+            "footerLogo":"https://e2eresearch.com/swteam/McKinsey/Assessment-app/mck-logo-footer.png",
+            "footerContent":"© 1996-2019 McKinsey & Company",            
+            "headers":["Category", "Assessment Clarity", "Description", "Module"],
+            "Modules":[
+                {
+                    "cat":"Strategy",
+                    "subCat":[
+                        {
+                            "subCatTxt":"Strategic Clarity",
+                            "subCatValue":"This is sample text",
+                            "isChecked": true,
+                            "isCheckable":false,
+                            "checkId":"id1"
+                        }                       
+                    ]
+                },
+                {
+                    "cat":"Organization",
+                    "subCat":[
+                        {
+                            "subCatTxt":"Process",
+                            "subCatValue":"This is sample text",
+                            "isChecked": true,
+                            "isCheckable":false,
+                            "checkId":"id2"
+                        },
+                        {
+                            "subCatTxt":"Governance & Structure",
+                            "subCatValue":"This is sample text",
+                            "isChecked": false,
+                            "isCheckable":true,
+                            "checkId":"id3"
+                        },
+                        {
+                             "subCatTxt":"Governance & Structure",
+                            "subCatValue":"This is sample text",
+                            "isChecked": false,
+                            "isCheckable":true,
+                            "checkId":"id4"
+                        }
+                    ]
+                }
+            ]
+        }
+    </span>
+
+    <div id="main-wrapper">
+        <header-large :json-data="jsonData"></header-large>
+        <module :json-data="jsonData"></module>
+        <intro-footer :json-data="jsonData"></intro-footer>
+    </div>
+
+    <script src="https://e2eresearch.com/swteam/McKinsey/Assessment-app/vue.js"></script>
+    <script src="https://e2eresearch.com/swteam/McKinsey/Assessment-app/OverlayScrollbars.min.js"></script>
+    <script src="https://e2eresearch.com/swteam/McKinsey/Assessment-app/module.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+.side-nav-wrapper {
+  width: 280px;
+  background-color: $bg-color;
+  color: white;
+  position: fixed;
+  top: 90px;
+  height: calc(100vh - 90px);
+  left: -280px; 
+  @include transition(left .3s ease-out);
+  z-index: 9;
+  @media (max-width:1024px){
+    border-top: 1px solid rgba(192, 192, 192, 0.3);
+  }
+
+  .side-nav-scroll{
+    overflow-y: auto;
+    height:calc(100vh - 118px);    
+        .os-scrollbar{
+         & > .os-scrollbar-track{
+         & > .os-scrollbar-handle{
+            background: $light-gray;
+        }
+        }
+      }
+     
+  }
+  .menu-list{
+    li{
+      position: relative;
+      .nav-item{
+        padding:15px;
+        span &:first-child{
+          padding-right: 50px;
+          display: block;
+        }
+        .rt-prgs {
+          float: right;
+          .plus-icon{
+            margin-left: 5px;
+            display: inline-block;
+            width:10px;
+            height: 10px;
+            position: relative;           
+            &:after{
+              content: '\002B';
+              color: $white;
+              font-size: 1.25em;
+              font-weight: bold;
+            }
+          }
+       }
+       &.open{
+         .rt-prgs{
+            .plus-icon{
+              &:after{
+                content: "\2212";
+                font-size: 1.25em;
+              }
+            }
+         }
+       }
+      }
+    }
+  }
+}
+.wrapper.toggled .inner-container .side-nav-wrapper {
+ left: 0;
+}
+// @media all and (min-width: 1025px){
+//   .inner-container .side-nav-wrapper {
+//       left: 0;
+//     }
+//    .wrapper.toggled .inner-container .side-nav-wrapper {
+//       left:-280px;
+//     }
+//   }
+  .submenu-list{
+    list-style: none;
+    // display: none;
+    max-height: 0;
+    overflow: hidden;
+    background: #04141f;
+    .sub-links{
+      border-bottom: 1px solid #0e2230;       
+      &:last-child{
+        border-bottom: none;
+      }
+      .nav-item{
+        font-size: 0.85em!important;    
+        padding-left: 30px!important;
+      }
+      &.selected{
+        color: $selectd;
+        border-left: 5px solid transparent;
+        background-color:#0c2e47;
+      }
+    }
+  }
+  .side-nav-wrapper .menu-list li .nav-item {
+    padding: 20px 15px;
+    font-size: 1rem;
+    font-weight: normal;
+    border-left: 5px solid transparent;
+    cursor: pointer;
+    &.selected {
+      color: $selectd;
+      border-color: #2251FF;
+      background-color: #082336;
+    }
+    @media (max-width:767px){
+      font-size: 0.90em;
+  }
+}
+.menuAnimate{
+  @include transition(max-height 0.4s linear);  
+  }   
+  .open {
+     max-height: 500px;
+  }

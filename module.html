@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module</title>
+    <link rel="stylesheet" type="text/css" href="./dist/css/module.css">
+    <link rel="stylesheet" href="./dist/css/OverlayScrollbars.css">
+</head>
+<body>
+
+    <span style="display: none;" id="jsonData">
+        {
+            "logo": "https://e2eresearch.com/swteam/McKinsey/Assessment-app/mck-logo.svg",
+            "title": "Contact Center Walkthrough",
+            "banner": "https://e2eresearch.com/swteam/McKinsey/Assessment-app/intro-banner.png",
+            "heading": "Select Module",
+            "frdBtnTxt": "Next",
+            "footerLogo": "https://e2eresearch.com/swteam/McKinsey/Assessment-app/mck-logo-footer.png",
+            "footerContent": "© 1996-2020 McKinsey &amp; Company",
+            "headers": ["Category", "Sub-Category", "Description", "Select"],
+            "Modules": [{
+                "cat": "Strategy",
+                "subCat": [{
+                    "subCatTxt": "Strategic Clarity",
+                    "subCatValue": "Strategic Clarity",
+                    "isChecked": true,
+                    "isCheckable": false,
+                    "checkId": "Mode_1_label"
+                }]
+            }, {
+                "cat": "Organization",
+                "subCat": [{
+                    "subCatTxt": "Processes",
+                    "subCatValue": "Processes",
+                    "isChecked": true,
+                    "isCheckable": false,
+                    "checkId": "Mode_2_label"
+                }, {
+                    "subCatTxt": "Governance &amp; Structure",
+                    "subCatValue": "Governance &amp; Structure",
+                    "isChecked": true,
+                    "isCheckable": false,
+                    "checkId": "Mode_3_label"
+                }, {
+                    "subCatTxt": "Culture",
+                    "subCatValue": "Culture",
+                    "isChecked": true,
+                    "isCheckable": false,
+                    "checkId": "Mode_4_label"
+                }]
+            }, {
+                "cat": "Levers",
+                "subCat": [{
+                    "subCatTxt": "Customer Satisfaction",
+                    "subCatValue": "Customer Satisfaction",
+                    "isChecked": false,
+                    "isCheckable": true,
+                    "checkId": "Mode_5_label"
+                }, {
+                    "subCatTxt": "Revenue Growth",
+                    "subCatValue": "Revenue Growth",
+                    "isChecked": false,
+                    "isCheckable": true,
+                    "checkId": "Mode_6_label"
+                }, {
+                    "subCatTxt": "Cost to Serve",
+                    "subCatValue": "Cost to Serve",
+                    "isChecked": false,
+                    "isCheckable": true,
+                    "checkId": "Mode_7_label"
+                }, {
+                    "subCatTxt": "Employee Satisfaction",
+                    "subCatValue": "Employee Satisfaction",
+                    "isChecked": false,
+                    "isCheckable": true,
+                    "checkId": "Mode_8_label"
+                }]
+            }, {
+                "cat": "Enablers",
+                "subCat": [{
+                    "subCatTxt": "Performance Management",
+                    "subCatValue": "Performance Management",
+                    "isChecked": false,
+                    "isCheckable": true,
+                    "checkId": "Mode_9_label"
+                }, {
+                    "subCatTxt": "Technology Enablement",
+                    "subCatValue": "Technology Enablement",
+                    "isChecked": false,
+                    "isCheckable": true,
+                    "checkId": "Mode_10_label"
+                }]
+            }]
+        }
+    </span>
+
+    <div id="main-wrapper">
+        <header-large :json-data="jsonData"></header-large>
+        <module :json-data="jsonData"></module>
+        <intro-footer :json-data="jsonData"></intro-footer>
+    </div>
+
+    <script src="dist/js/vendor/vue.js"></script>
+    <script src="dist/js/production/OverlayScrollbars.min.js"></script>
+    <script src="dist/js/production/module.js"></script>
+</body>
+</html>

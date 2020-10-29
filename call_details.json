@@ -1,0 +1,100 @@
+{
+    "headerData": {
+        "logo": "mck-logo.svg",
+        "headerTitle": "CC360 Digitalization",
+        "leftPanelOpen": "false"
+    },
+    
+    "leftData":{
+        "seltdParentVal":"Section2",
+        "seltdChildVal":"Section21",
+        "links": [
+        {
+            "menuTxt": "Introduction",
+            "menuVal": "Section1",
+            "initialQAnsd": "1",
+            "totalQues": "1",
+            "intialUponTtl": "/"
+        },{
+            "menuTxt": "Overview",
+            "menuVal": "Section2",
+            "initialQAnsd": "0",
+            "totalQues": "12",
+            "intialUponTtl": "/"        
+        }]
+    },
+
+    "rightData":{
+        "readdOnly":false,
+        "catType":2,
+        "heading":"Call details",
+        "subheading":"calls/integration details",
+        "questions":[
+            {
+                "questionHeading":"Footprint by  geo, economy, service type and size",
+                "quesLength":1,
+                "options":[
+                    {
+                        "optionName":"inbound calls...",
+                        "type":"num",
+                        "description":"this is some description",
+                        "selectedText":"9999999999",
+                        "selectedId":"id4",
+                        "afterText":"$",
+                        "maxLength":10
+                    }
+                ]
+
+            },
+            {
+                "questionHeading":"inbound calls...",
+                "quesLength":2,
+                "options":[
+                    {
+                        "optionName":"Customer service...",
+                        "type":"num",
+                        "description":"this is some description",
+                        "selectedText":"9999999999",
+                        "selectedId":"id5",
+                        "afterText":"$",
+                        "maxLength":10
+                    },
+                    {
+                        "optionName":"Customer service...",
+                        "type":"num",
+                        "description":"this is some description",
+                        "selectedText":"9999999999",
+                        "selectedId":"id5",
+                        "afterText":"%",
+                        "maxLength":10
+                    }
+                ]
+
+            }
+        ]
+    },
+
+    "progressData": {
+        "answerTxt": "Answered",
+        "answrdQues": "0",
+        "of": "of",
+        "totalQues": "8",
+        "percentge": "10",
+        "saveTxt":"Save",
+        "sveVal":"1",
+        "submitTxt":"Submit",
+        "submitVal":"2"
+    },
+
+    "footerData": {
+        "prevTxt": "Previous",
+        "prevVal": "1",
+        "forwardTxt": "Forward",
+        "forwardVal": "2",
+        
+        "footerLogo": "https://e2eresearch.com/swteam/McKinsey/Assessment-app/mck-logo-footer.png",
+        "copyrghtTxt": "© 1996-2019 McKinsey & Company"
+    }
+
+
+}
