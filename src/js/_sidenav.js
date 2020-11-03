@@ -5,29 +5,15 @@ Vue.component("left-panel", {
               <div class='side-nav-scroll'>
                 <ul v-if="LeftData.links.length>0" class="menu-list">
                   <li v-for="(item,index) in LeftData.links" :key="item.menuVal">
-                    <div class="nav-item" :data-menuval = item.menuVal :id='"menu_"+index' :class="{selected:LeftData.seltdParentVal == item.menuVal,open:LeftData.seltdParentVal == item.menuVal}"
-                    v-on:click.stop="item.sublinks.length ? openBelow(index, $event):navClick(item.menuVal,'')">
+                    <div class="nav-item" :data-menuval = item.menuVal :id='"menu_"+index' :class="{selected:LeftData.seltdVal == item.menuVal,open:LeftData.seltdVal == item.menuVal}"
+                    v-on:click.stop="navClick(item.menuVal,'')">
                       <span>{{item.menuTxt}}</span>
                       <span class="rt-prgs">
                         <span v-if="item.initialQAnsd && item.totalQues">
                           {{item.initialQAnsd+""+item.intialUponTtl+""+item.totalQues}}
                         </span>
-                        <span v-if="LeftData.seltdParentVal == item.menuVal && item.sublinks.length>0 " class="plus-icon"></span>
-                        <span v-if="item.sublinks.length>0 && LeftData.seltdParentVal != item.menuVal" class="plus-icon"></span>
                       </span>
                     </div>
-                    <ul v-if="item.sublinks.length>0" class="submenu-list menuAnimate">
-                      <li v-for="sublink of item.sublinks" class="sub-links" 
-                      @click="navClick(item.menuVal,sublink.sublinkVal)"
-                      :class="{selected:LeftData.seltdChildVal == sublink.sublinkVal}"><div class="nav-item">
-                      <span>{{sublink.sublinkTxt}}</span>
-                      <span class="rt-prgs">
-                        <span v-if="sublink.initialSubQAnsd && sublink.totalSubQues">
-                        <span class='attemptQues' v-html="sublink.initialSubQAnsd"></span>{{sublink.intialUponTtl+""+sublink.totalSubQues}}
-                        </span>
-                      </span>
-                      </div></li>
-                    </ul>
                   </li>
                 </ul>
                 </div>
@@ -35,44 +21,44 @@ Vue.component("left-panel", {
     `,
 
     mounted:function(){
-      for(let link of this.LeftData.links){
-        if(this.LeftData.seltdParentVal == link.menuVal && link.sublinks.length>0){
-          var el = document.querySelector("[data-menuVal='"+link.menuVal+"']").nextElementSibling;
-          el.classList.add('open');
-        }
-      }
+      // for(let link of this.LeftData.links){
+      //   if(this.LeftData.seltdParentVal == link.menuVal && link.sublinks.length>0){
+      //     var el = document.querySelector("[data-menuVal='"+link.menuVal+"']").nextElementSibling;
+      //     el.classList.add('open');
+      //   }
+      // }
 
-      document.getElementById("left-panel-menu-slctn").value = this.LeftData.seltdParentVal;      
-      document.getElementById("left-panel-subMenu-slctn").value = this.LeftData.seltdChildVal;
+      // document.getElementById("left-panel-menu-slctn").value = this.LeftData.seltdParentVal;      
+      // document.getElementById("left-panel-subMenu-slctn").value = this.LeftData.seltdChildVal;
 
-      let linksLen = this.LeftData.links.length;
+      // let linksLen = this.LeftData.links.length;
       
-      if(this.LeftData.links[0].sublinks.length == 0 && this.LeftData.seltdParentVal ==this.LeftData.links[0].menuVal ){
+      // if(this.LeftData.links[0].sublinks.length == 0 && this.LeftData.seltdParentVal ==this.LeftData.links[0].menuVal ){
         
-        this.$parent.disPrevParent();//calling parent
-      }
-      else if(this.LeftData.links[0].sublinks.length != 0 && this.LeftData.seltdParentVal ==this.LeftData.links[0].menuVal && this.LeftData.seltdChildVal ==this.LeftData.links[0].sublinks[0].sublinkVal ){
+      //   this.$parent.disPrevParent();//calling parent
+      // }
+      // else if(this.LeftData.links[0].sublinks.length != 0 && this.LeftData.seltdParentVal ==this.LeftData.links[0].menuVal && this.LeftData.seltdChildVal ==this.LeftData.links[0].sublinks[0].sublinkVal ){
         
-        this.$parent.disPrevParent();//calling parent
-      }else if(this.LeftData.links[linksLen-1].sublinks.length == 0 && this.LeftData.seltdParentVal ==this.LeftData.links[linksLen-1].menuVal){
+      //   this.$parent.disPrevParent();//calling parent
+      // }else if(this.LeftData.links[linksLen-1].sublinks.length == 0 && this.LeftData.seltdParentVal ==this.LeftData.links[linksLen-1].menuVal){
         
-        this.$parent.disNextParent();//calling parent
-      }else if(this.LeftData.links[linksLen-1].sublinks.length != 0 && this.LeftData.seltdParentVal ==this.LeftData.links[linksLen-1].menuVal){
+      //   this.$parent.disNextParent();//calling parent
+      // }else if(this.LeftData.links[linksLen-1].sublinks.length != 0 && this.LeftData.seltdParentVal ==this.LeftData.links[linksLen-1].menuVal){
         
-        let subLinkLen = this.LeftData.links[linksLen-1].sublinks.length;
-        if(this.LeftData.seltdChildVal ==this.LeftData.links[linksLen-1].sublinks[subLinkLen-1].sublinkVal){
-          this.$parent.disNextParent();//calling parent
-        }
-      }
+      //   let subLinkLen = this.LeftData.links[linksLen-1].sublinks.length;
+      //   if(this.LeftData.seltdChildVal ==this.LeftData.links[linksLen-1].sublinks[subLinkLen-1].sublinkVal){
+      //     this.$parent.disNextParent();//calling parent
+      //   }
+      // }
 
-      this.checkSubmitBtn();
+      // this.checkSubmitBtn();
       
     },
     methods: {
         
       navClick: function(menuVal,sublinkVal){                
         document.getElementById("left-panel-menu-slctn").value = menuVal;      
-        document.getElementById("left-panel-subMenu-slctn").value = sublinkVal;      
+        // document.getElementById("left-panel-subMenu-slctn").value = sublinkVal;      
         document.getElementById("forwardbutton").click();
       },
       openBelow: function(index,e){

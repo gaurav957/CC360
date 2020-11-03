@@ -8,6 +8,7 @@ var eventInputvueObj = new Vue({
   el: "#main-wrapper",
   data: {
     alldata: {},
+    alldata2: {},
     headerdata: {},
     leftdata: {},
     rightdata: {},
@@ -64,12 +65,18 @@ var eventInputvueObj = new Vue({
     //console.log(JSON.parse(document.getElementById("jsonData").innerHTML))
     if (document.getElementById("jsonData")) {
       this.alldata = JSON.parse(document.getElementById("jsonData").innerText);
+      this.alldata2 = JSON.parse(document.getElementById("jsonData2").innerText);
       this.headerdata = this.alldata.headerData;
       this.leftdata = this.alldata.leftData;
-      this.rightdata = this.alldata.rightData;
-      this.progressdata = this.alldata.progressData;      
+      // this.rightdata = this.alldata.rightData;
+      // this.progressdata = this.alldata.progressData;      
+      this.rightdata = this.alldata2.rightData;
+      this.progressdata = this.alldata2.progressData;      
       this.footerdata = this.alldata.footerData;
     }
+
+    console.log(this.alldata)
+    console.log(this.alldata2)
 
     //alert(JSON.stringify(this.alldata));
     //alert(JSON.stringify(this.leftdata));

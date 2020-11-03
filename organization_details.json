@@ -23,7 +23,7 @@
         }]
     },
 
-    "rightData":{
+    "rightData":[{
         "readdOnly":false,
         "catType":1,
         "heading":"Organizational details",
@@ -66,6 +66,55 @@
             }
         ]
     },
+    {
+    "readdOnly":false,
+    "catType":2,
+    "heading":"Call details",
+    "subheading":"calls/integration details",
+    "questions":[
+        {
+            "questionHeading":"Footprint by  geo, economy, service type and size",
+            "quesLength":1,
+            "options":[
+                {
+                    "optionName":"inbound calls...",
+                    "type":"num",
+                    "description":"this is some description",
+                    "selectedText":"9999999999",
+                    "selectedId":"id4",
+                    "afterText":"$",
+                    "maxLength":10
+                }
+            ]
+
+        },
+        {
+            "questionHeading":"inbound calls...",
+            "quesLength":2,
+            "options":[
+                {
+                    "optionName":"Customer service...",
+                    "type":"num",
+                    "description":"this is some description",
+                    "selectedText":"9999999999",
+                    "selectedId":"id5",
+                    "afterText":"$",
+                    "maxLength":10
+                },
+                {
+                    "optionName":"Customer service...",
+                    "type":"num",
+                    "description":"this is some description",
+                    "selectedText":"9999999999",
+                    "selectedId":"id5",
+                    "afterText":"%",
+                    "maxLength":10
+                }
+            ]
+
+        }
+    ]
+}],
 
     "progressData": {
         "answerTxt": "Answered",
