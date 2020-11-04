@@ -4,67 +4,88 @@ Vue.component("right-panel", {
   <div class="right-panel clearfix">
     <progress-panel ref="prsPanel" :progress-data="progressData"></progress-panel>
     <div class="survey-wrapper"> 
-      <div class="scrollable">   
-      <div class="accordian-inner" v-for="(category,catIn) in rightData.categories">
-        <h2 class="accordion active" @click="openAccordion($event)" v-html='category.heading'></h2>
-        <div class="accordion-panel" >
-          <div class="accordion-resize" >
-            <div v-for="(subCategory,subCatIn) in category.subCategories">
-            <div class="survey-title" v-if="subCategory.subHeading" v-html='subCategory.subHeading'></div>
-            <div
-              v-for="(question, quesInd) in subCategory.questions"
-              class="question-resize"
-            >
-              <div class="survey-info">
-                <span class="survey-info-messg" v-html='question.quesText'></span>
-                <div class="instruct-info"  v-if="question.quesDescription">                 
-                  <span class="" v-html='question.quesDescription'></span>
+      <div class="scrollable">
+        <div class="questions-inner" v-for="qType of rightData" v-if="qType.catType ===1">
+          <h2 class="ques-heading" v-html='qType.heading'></h2>
+          <div class="question-type1">
+            <h4 class="sub-heading" v-html='qType.subheading'></h4>
+            <p class="question-line" v-html='qType.categoryHeading'></p>
+            <div class="question-row" v-for="question of qType.questions">
+              <div class="question-group" v-if="question.type=='dd'">
+                <div class="text-label"><span v-html='question.optionName'></span> 
+                  <span class="tooltips">
+                      <div class="tooltip">
+                        <span class="custom-infoicon"></span>
+                        <span class="tooltiptext" >dd</span>
+                      </div>
+                  </span>
+                </div>
+                <div class="input-box">
+                  <select>
+                    <option disabled v-html="question.placeholder" selected></option>
+                    <option v-for="option of question.options" v-html="option.ddName" :id="option.ddId"></option>
+                  </select>
                 </div>
               </div>
-              <div class="survey-type">
-                <div class="survey-row" :data-id="catIn+'_'+subCatIn+'_'+quesInd">
-                  <div
-                    class="s-col"
-                    v-for="(option, index) in question.options"
-                  >
-                    <div class="survey-card" :data_id="option.optionsId" 
-                    :class="{selectedsurvey:question.selected==option.optionsId}" @click="handleAnswerSelect(option.optionsId,catIn,subCatIn, quesInd)">
-                      <div class="s-crad-header" v-html='rightData.ratingTxt[index]'></div>
-                      <div class="s-crad-body" v-html='option.optionText'></div>
+
+              <div class="question-group" v-if="question.type=='txt' || question.type=='num'">
+                <div class="text-label"><span v-html="question.optionName"></span>
+                  <span class="tooltips">
+                    <div class="tooltip">
+                      <span class="custom-infoicon"></span>
+                      <span class="tooltiptext" v-html="question.description"></span>
                     </div>
-                  </div>
+                  </span>
                 </div>
-                <div class="ctrl-sm-chk">
-                  <div class="catg-selection">
-                      <div class="pure-radiobutton">
-                        <input :checked="question.selected == question.naId" :id="'cus_'+question.naId" :name="'cus_'+question.naId" type="radio" value="3" class="radio" />                               
-                        <label @click="handleAnswerSelect(question.naId,catIn,subCatIn, quesInd)" :for="'cus_'+question.naId" v-html="rightData.naText">Hello</label>
-                     </div>
-                  </div> 
-               </div>
-                <div class="other-type-row">
-                  <div class="other-quest" v-html='rightData.cmntHeding'></div>
-                  <div class="other-form">
-                    <input
-                      type="text"
-                      class="other-form-ctrl"
-                      :placeholder="rightData.cmntPlaceHolder"
-                      :value="question.detailVal"
-                      @input="handleKeyDown(catIn,subCatIn,quesInd,question.detailId,$event)"
-                    />
-                  </div>
+                <div class="input-box">
+                  <input type="text" class="cst-form-control" :placeholder="question.placeholder" :id="question.selectedId" />
                 </div>
-                <div class="survey-type-overlay" v-if="rightData.readdOnly"></div>
+              </div>
+            </div>            
+          
+          </div>          
+        </div>
+    
+        <div class="questions-inner" v-for="qType of rightData" v-if="qType.catType ===2">
+          <h2 class="ques-heading" v-html='qType.heading'></h2>
+          <div class="question-type2">
+            <h4 class="sub-heading" v-html='qType.subheading'></h4>           
+            <div class="question-row" v-for="question of qType.questions">
+            <div class="question-line" v-html='question.questionHeading'>Annual inbound calls</div>
+              <div class="question-group">
+                <div class="text-label">Inbound - calls - agent handled only 
+                  <span class="tooltips">
+                      <div class="tooltip">
+                        <span class="custom-infoicon"></span>
+                        <span class="tooltiptext">Strategic Contact Clarity priority description. . . . </span>
+                      </div>
+                  </span>
+                </div>
+                <div class="input-box">
+                  <input type="text" class="cst-form-control">
+                </div>
               </div>
             </div>
-            </div>
-          </div>
+            
+            <div class="question-row">
+              <div class="question-line">Annual inbound emails</div>
+                <div class="question-group">
+                  <div class="text-label">Inbound - emails - agent handled only
+                    <span class="tooltips">
+                      <div class="tooltip">
+                        <span class="custom-infoicon"></span>
+                        <span class="tooltiptext">Strategic Contact Clarity priority description. . . . </span>
+                      </div>
+                    </span>
+                  </div>
+                  <div class="input-box">
+                    <input type="text" class="cst-form-control">
+                  </div>
+                </div>
+              </div>
+          </div>          
+        </div> 
 
-          </div>
-
-        </div>
-      </div>
-      </div>
       </div>
     </div>
   </div>

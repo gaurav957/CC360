@@ -75,7 +75,7 @@ var eventInputvueObj = new Vue({
       this.footerdata = this.alldata.footerData;
     }
 
-    console.log(this.alldata)
+    //console.log(this.alldata)
     console.log(this.alldata2)
 
     //alert(JSON.stringify(this.alldata));
