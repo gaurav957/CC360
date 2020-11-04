@@ -14,7 +14,90 @@
 	<header-panel :header-data="headerdata"></header-panel>
 	<div class="inner-container">
         <left-panel ref="leftPanel" :left-data="leftdata"></left-panel>
-        <right-panel ref="rightPanel" @handlequesselect="handleSelect" :right-data="rightdata" :left-data="leftdata" :progress-data="progressdata"></right-panel>
+        <right-panel ref="rightPanel" @handlequesselect="handleSelect" :right-data="rightdata" :left-data="leftdata" :progress-data="progressdata" inline-template>
+            <div class="right-panel-wrapper">
+                <div class="right-panel clearfix">
+                  <progress-panel ref="prsPanel" :progress-data="progressData"></progress-panel>
+                  <div class="survey-wrapper"> 
+                    <div class="scrollable">
+                      <!-- <div class="questions-inner" v-for="qType of rightData" v-if="qType.catType ===1">
+                        <h2 class="ques-heading" v-html='qType.heading'></h2>
+                            <div class="question-type1">
+                          <h4 class="sub-heading" v-html='qType.subheading'></h4>
+                          <p class="question-line" v-html='qType.categoryHeading'></p>
+                          <div class="question-row" v-for="question of qType.questions">
+                            <div class="question-group" v-if="question.type=='dd'">
+                              <div class="text-label"><span v-html='question.optionName'></span> 
+                                <span class="tooltips">
+                                    <div class="tooltip">
+                                      <span class="custom-infoicon"></span>
+                                      <span class="tooltiptext" v-html="question.description" ></span>
+                                    </div>
+                                </span>
+                              </div>
+                              <div class="input-box">
+                                <select>
+                                  <option disabled v-html="question.placeholder" selected></option>
+                                  <option v-for="option of question.options" v-html="option.ddName" :id="option.ddId"></option>
+                                </select>
+                              </div>
+                            </div>
+              
+                            <div class="question-group" v-if="question.type=='txt' || question.type=='num'">
+                              <div class="text-label"><span v-html="question.optionName"></span>
+                                <span class="tooltips">
+                                  <div class="tooltip">
+                                    <span class="custom-infoicon"></span>
+                                    <span class="tooltiptext" v-html="question.description"></span>
+                                  </div>
+                                </span>
+                              </div>
+                              <div class="input-box">
+                                <input type="text" class="cst-form-control" :placeholder="question.placeholder" :id="question.selectedId" />
+                              </div>
+                            </div>
+                          </div>            
+                        
+                        </div>          
+                      </div> -->
+                  
+                      <div class="questions-inner" v-for="qType of rightData" v-if="qType.catType ===2">
+                        <h2 class="ques-heading" v-html='qType.heading'></h2>
+                        <div class="question-type2" >
+                          <h4 class="sub-heading" v-html='qType.subheading'></h4>           
+                          <div class="question-row" v-for="question of qType.questions" :class="{'wide': question.quesLength>1 }">                          
+
+                          <div class="question-line" v-html='question.questionHeading'></div>
+                            <div class="question-group" v-for="option of question.options">
+                              <div class="text-label"><span v-html='option.optionName'></span>
+                                <span class="tooltips">
+                                    <div class="tooltip">
+                                      <span class="custom-infoicon"></span>
+                                      <span class="tooltiptext" v-html="option.description"></span>
+                                    </div>
+                                </span>
+                              </div>
+                              <div class="input-box">
+                                  <!-- <input type="text" :id="option.selectedId"> -->
+                                <input v-if="option.type=='num' || option.type=='txt'" type="text" :placeholder="option.placeholder"
+                                class="cst-form-control"  :value="option.selectedText" @input="handleInput(option.selectedId, 10,option.type , $event)">
+
+                                <select v-if="option.type=='dd' " class="cst-form-control">
+                                    <option disabled v-html="option.placeholder" selected></option>
+                                    <option v-for="quesOption of option.options" v-html="quesOption.ddName" ></option>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>          
+                      </div> 
+              
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </right-panel>
         <footer-panel ref='footerPanel' :footer-data="footerdata"></footer-panel>
     </div>
 </div>
@@ -122,13 +205,14 @@
                     "heading": "Call details",
                     "subheading": "calls/integration details",
                     "questions": [{
-                            "questionHeading": "Footprint by  geo, economy, service type and size",
+                            "questionHeading": "Annual inbound calls",
                             "quesLength": 1,
                             "options": [{
-                                "optionName": "inbound calls...",
+                                "optionName": "Inbound-calls-agent handled only",
                                 "type": "num",
                                 "description": "this is some description",
-                                "selectedText": "9999999999",
+                                "placeholder":"Please enter a value",
+                                "selectedText": "",
                                 "selectedId": "id4",
                                 "afterText": "$",
                                 "maxLength": 10
@@ -140,20 +224,61 @@
                             "options": [{
                                 "optionName": "Inbound - emails - agent handled only ",
                                 "type": "num",
+                                "placeholder":"Please enter a value",
                                 "description": "this is some description",
                                 "selectedText": "9999999999",
                                 "selectedId": "id1_2",
                                 "afterText": "$",
                                 "maxLength": 10
-                            }]
-        
+                            }]     
         
                         },
                         {
-                            "questionHeading": "inbound calls...",
+                            "questionHeading": "Annual inbound emails",
                             "quesLength": 1,
                             "options": [{
-                                    "optionName": "Customer service...",
+                                "optionName": "Inbound - emails - agent handled only ",
+                                "type": "num",
+                                "placeholder":"Please enter a value",
+                                "description": "this is some description",
+                                "selectedText": "9999999999",
+                                "selectedId": "id1_3",
+                                "afterText": "$",
+                                "maxLength": 10
+                            }]     
+        
+                        },
+                        {
+                            "questionHeading": "Annual inbound emails",
+                            "quesLength": 1,
+                            "options": [{
+                                "optionName": "Inbound - emails - agent handled only ",
+                                "type": "dd",
+                                "description": "this is some description",
+                                "placeholder":"Please select a value",
+                                "selectedText": "9999999999",
+                                "selectedId": "id1_4",
+                                "afterText": "$",
+                                "maxLength": 10,
+                                "options": [{
+                                    "ddName": "Something sdfsdf",
+                                    "ddId": "id1"
+                                },
+                                {
+                                    "ddName": "Something2fsdf",
+                                    "ddId": "id2"
+                                }
+                            ]
+                            }                      
+                            
+                            ]     
+        
+                        },
+                        {
+                            "questionHeading": "Ifsefsenbound calls volumen mix- please provide site",
+                            "quesLength": 2,
+                            "options": [{
+                                    "optionName": "fvgesfv vgfasdf wdf fsaes f",
                                     "type": "num",
                                     "description": "this is some description",
                                     "selectedText": "9999999999",
