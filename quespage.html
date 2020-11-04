@@ -78,9 +78,9 @@
                                 </span>
                               </div>
                               <div class="input-box">
-                                  <!-- <input type="text" :id="option.selectedId"> -->
+                            
                                 <input v-if="option.type=='num' || option.type=='txt'" type="text" :placeholder="option.placeholder"
-                                class="cst-form-control"  :value="option.selectedText" @input="handleInput(option.selectedId, 10,option.type , $event)">
+                                class="cst-form-control"  :value="option.selectedText" @input="handleInput(option.selectedId, 10, $event)">
 
                                 <select v-if="option.type=='dd' " class="cst-form-control">
                                     <option disabled v-html="option.placeholder" selected></option>
@@ -212,7 +212,7 @@
                                 "type": "num",
                                 "description": "this is some description",
                                 "placeholder":"Please enter a value",
-                                "selectedText": "",
+                                "selectedText": "9999999999",
                                 "selectedId": "id4",
                                 "afterText": "$",
                                 "maxLength": 10

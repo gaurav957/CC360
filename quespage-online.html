@@ -5,396 +5,685 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>question Page</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" />
-<link rel="stylesheet" href="https://e2eresearch.com/swteam/McKinsey/Assessment-app/dashboard.css" />
-
+<link rel="stylesheet" href="dist/css/dashboard.css" />
+<link rel="stylesheet" type="text/css" href="dist/css/OverlayScrollbars.css"  />
 </head>
 <body class="body-bg">
 
 <div class="wrapper" id="main-wrapper">
 	<header-panel :header-data="headerdata"></header-panel>
 	<div class="inner-container">
-
-  
         <left-panel ref="leftPanel" :left-data="leftdata"></left-panel>
-        <right-panel ref="rightPanel" @handlequesselect="handleSelect" :right-data="rightdata" :left-data="leftdata" :progress-data="progressdata"></right-panel>
+        <right-panel ref="rightPanel" @handlequesselect="handleSelect" :right-data="rightdata" :left-data="leftdata" :progress-data="progressdata" inline-template>
+            <div class="right-panel-wrapper">
+                <div class="right-panel clearfix">
+                  <progress-panel ref="prsPanel" :progress-data="progressData"></progress-panel>
+                  <div class="survey-wrapper"> 
+                    <div class="scrollable">
+                      <!-- <div class="questions-inner" v-for="qType of rightData" v-if="qType.catType ===1">
+                        <h2 class="ques-heading" v-html='qType.heading'></h2>
+                            <div class="question-type1">
+                          <h4 class="sub-heading" v-html='qType.subheading'></h4>
+                          <p class="question-line" v-html='qType.categoryHeading'></p>
+                          <div class="question-row" v-for="question of qType.questions">
+                            <div class="question-group" v-if="question.type=='dd'">
+                              <div class="text-label"><span v-html='question.optionName'></span> 
+                                <span class="tooltips">
+                                    <div class="tooltip">
+                                      <span class="custom-infoicon"></span>
+                                      <span class="tooltiptext" v-html="question.description" ></span>
+                                    </div>
+                                </span>
+                              </div>
+                              <div class="input-box">
+                                <select>
+                                  <option disabled v-html="question.placeholder" selected></option>
+                                  <option v-for="option of question.options" v-html="option.ddName" :id="option.ddId"></option>
+                                </select>
+                              </div>
+                            </div>
+              
+                            <div class="question-group" v-if="question.type=='txt' || question.type=='num'">
+                              <div class="text-label"><span v-html="question.optionName"></span>
+                                <span class="tooltips">
+                                  <div class="tooltip">
+                                    <span class="custom-infoicon"></span>
+                                    <span class="tooltiptext" v-html="question.description"></span>
+                                  </div>
+                                </span>
+                              </div>
+                              <div class="input-box">
+                                <input type="text" class="cst-form-control" :placeholder="question.placeholder" :id="question.selectedId" />
+                              </div>
+                            </div>
+                          </div>            
+                        
+                        </div>          
+                      </div> -->
+                  
+                      <div class="questions-inner" v-for="qType of rightData" v-if="qType.catType ===2">
+                        <h2 class="ques-heading" v-html='qType.heading'></h2>
+                        <div class="question-type2" >
+                          <h4 class="sub-heading" v-html='qType.subheading'></h4>           
+                          <div class="question-row" v-for="question of qType.questions" :class="{'wide': question.quesLength>1 }">                          
 
-        <footer-panel :footer-data="footerdata"></footer-panel>
+                          <div class="question-line" v-html='question.questionHeading'></div>
+                            <div class="question-group" v-for="option of question.options">
+                              <div class="text-label"><span v-html='option.optionName'></span>
+                                <span class="tooltips">
+                                    <div class="tooltip">
+                                      <span class="custom-infoicon"></span>
+                                      <span class="tooltiptext" v-html="option.description"></span>
+                                    </div>
+                                </span>
+                              </div>
+                              <div class="input-box">
+                            
+                                <input v-if="option.type=='num' || option.type=='txt'" type="text" :placeholder="option.placeholder"
+                                class="cst-form-control"  :value="option.selectedText" @input="handleInput(option.selectedId, 10, $event)">
+
+                                <select v-if="option.type=='dd' " class="cst-form-control">
+                                    <option disabled v-html="option.placeholder" selected></option>
+                                    <option v-for="quesOption of option.options" v-html="quesOption.ddName" ></option>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>          
+                      </div> 
+              
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </right-panel>
+        <footer-panel ref='footerPanel' :footer-data="footerdata"></footer-panel>
     </div>
 </div>
  <!--Main wrapper end-->
- 	<span id="jsonData" style="display: none">
-		{
-			"headerData": {
-				"logo": "https://e2eresearch.com/swteam/McKinsey_digital_20-20/AQ/browser_check/mck-logo.svg",
-                "headerTitle": "Analytics Quotient/Agile360",
-                "leftPanelOpen": false
-			},
-			
-			"leftData":{
-				"leftPanelOpen": false,
-				"selectedLeft":"Section1",
-				"seltdParentVal":"Section2",
-				"seltdChildVal":"Section21",
-				"links": [
-				{
-					"menuTxt": "Introduction",
-					"sublinks": [],
-					"menuVal": "Section1",
-					"initialQAnsd": "",
-					"totalQues": "",
-					"intialUponTtl": ""
-				},{
-					"menuTxt": "Overview",
-					"menuVal": "Section2",
-                    "initialQAnsd": "0",
-					"totalQues": "12",
-					"intialUponTtl": "/",
-					"sublinks": [{
-						"sublinkTxt": "Processes",
-						"sublinkVal": "Section21",
-						"initialSubQAnsd": "0",
-						"totalSubQues": "8",
-						"intialUponTtl": "/"
-					}, {
-						"sublinkTxt": "Governance & Structure",
-						"sublinkVal": "Section22",
-						"initialSubQAnsd": "0",
-						"totalSubQues": "2",
-						"intialUponTtl": "/"
-					}, {
-						"sublinkTxt": "Governance & Structure",
-						"sublinkVal": "Section23",
-						"initialSubQAnsd": "1",
-						"totalSubQues": "2",
-						"intialUponTtl": "/"
-					}]
-				
-				},{
-					"menuTxt": "Strategy",
-					"sublinks": [],
-					"menuVal": "Section4",
-					"initialQAnsd": "0",
-					"totalQues": "9",
-					"intialUponTtl": "/"
-				}, {
-					"menuTxt": "Organization",
-					"menuVal": "Section5",
-					"initialQAnsd": "",
-					"totalQues": "",
-					"intialUponTtl": "/",
-					"sublinks": [{
-						"sublinkTxt": "Processes",
-						"sublinkVal": "Section51",
-						"initialSubQAnsd": "0",
-						"totalSubQues": "22",
-						"intialUponTtl": "/"
-					}, {
-						"sublinkTxt": "Governance & Structure",
-						"sublinkVal": "Section52",
-						"initialSubQAnsd": "0",
-						"totalSubQues": "10",
-						"intialUponTtl": "/"
-					}, {
-						"sublinkTxt": "Governance & Structure",
-						"sublinkVal": "Section53",
-						"initialSubQAnsd": "0",
-						"totalSubQues": "8",
-						"intialUponTtl": "/"
-					}]
-				}]
-			},
-		
-			"rightData":{
-				"ratingTxt":["1-Considerable Improvement potential","2-improvement potential","3-Good Practice","4-Best Practice"],
-				"cmntHeding":"Observation",
-				"cmntPlaceHolder":"Please enter your observation",
-				"categories":[
-            {
-                "heading":"Strategy",
-                "subCategories":[
-                    {
-                        "subHeading":"Strategic Clarity",
-                        "questions":[
-                            {
-                                "questionId":"str_1",
-                                "quesText":"Strategic Contact Clarity priority",
-                                "quesDescription":"Strategic Contact Clarity priority description. . . . ",
-                                "selected":"",
-                                "detailId":"obser_1",
-                                "detailVal":"",
-                                "options":[
-                                    {
-                                        "optionsId":"1",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"2",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"3",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"4",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    }
-                                ]
-                            },
-                            {
-                                "questionId":"str_2",
-                                "quesText":"Strategic Contact Clarity stability",
-                                "quesDescription":"Strategic Contact Clarity stability description. . . . ",
-                                "selected":"",
-                                "detailId":"obser_2",
-                                "detailVal":"",
-                                "options":[
-                                    {
-                                        "optionsId":"5",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"6",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"7",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"8",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    }
-                                ]
-                            }
-                        ]                        
-                    },
-                    {
-                        "subHeading":"Strategic Stability",
-                        "questions":[
-                            {
-                                "questionId":"str_3",
-                                "quesText":"Strategic Contact Clarity priority",
-                                "quesDescription":"Strategic Contact Clarity priority description. . . . ",
-                                "selected":"",
-                                "detailId":"obser_3",
-                                "detailVal":"",
-                                "options":[
-                                    {
-                                        "optionsId":"9",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"10",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"11",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"12",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    }
-                                ]
-                            },
-                            {
-                                "questionId":"str_4",
-                                "quesText":"Strategic Contact Clarity stability",
-                                "quesDescription":"Strategic Contact Clarity stability description. . . . ",
-                                "selected":"",
-                                "detailId":"obser_4",
-                                "detailVal":"",
-                                "options":[
-                                    {
-                                        "optionsId":"13",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"14",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"15",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"16",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    }
-                                ]
-                            }
-                        ]                        
-                    }
-                ]
+ 	
+    <span id="jsonData2" style="display: none">
+        {
+            "headerData": {
+                "logo": "https://e2eresearch.com/swteam/McKinsey/CC360_KPI_Project/mck-logo.svg",
+                "headerTitle": "CC 360 Assessment",
+                "leftPanelOpen": "false"
             },
-            {
-                "heading":"Observation",
-                "subCategories":[
-                    {
-                        "subHeading":"Observation Clarity",
-                        "questions":[
-                            {
-                                "questionId":"ob_1",
-                                "quesText":"Strategic Contact Clarity priority",
-                                "quesDescription":"Strategic Contact Clarity priority description. . . . ",
-                                "selected":"",
-                                "detailId":"obser_5",
-                                "detailVal":"",
-                                "options":[
-                                    {
-                                        "optionsId":"17",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"18",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"19",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"20",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    }
-                                ]
-                            },
-                            {
-                                "questionId":"ob_2",
-                                "quesText":"Strategic Contact Clarity stability",
-                                "quesDescription":"Strategic Contact Clarity stability description. . . . ",
-                                "selected":"",
-                                "detailId":"obser_6",
-                                "detailVal":"",
-                                "options":[
-                                    {
-                                        "optionsId":"21",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"22",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"23",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"24",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    }
-                                ]
-                            }
-                        ]                        
-                    },
-                    {
-                        "subHeading":"Strategic Stability",
-                        "questions":[
-                            {
-                                "questionId":"ob_3",
-                                "quesText":"Strategic Contact Clarity priority",
-                                "quesDescription":"Strategic Contact Clarity priority description. . . . ",
-                                "selected":"",
-                                "detailId":"obser_7",
-                                "detailVal":"",
-                                "options":[
-                                    {
-                                        "optionsId":"25",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"26",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"27",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"28",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    }
-                                ]
-                            },
-                            {
-                                "questionId":"ob_4",
-                                "quesText":"Strategic Contact Clarity stability",
-                                "quesDescription":"Strategic Contact Clarity stability description. . . . ",
-                                "selected":"",
-                                "detailId":"obser_8",
-                                "detailVal":"",
-                                "options":[
-                                    {
-                                        "optionsId":"29",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"30",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"31",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    },
-                                    {
-                                        "optionsId":"32",
-                                        "optionText":"Neither CC strategy is well defined"
-                                    }
-                                ]
-                            }
-                        ]                        
-                    }
-                ]
+            "leftData": {
+                "seltdVal": "",
+                "links": [{
+                    "menuTxt": "Organizational details",
+                    "menuVal": "FP_GEO_DD",
+                    "initialQAnsd": "0",
+                    "totalQues": "11",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "Call details",
+                    "menuVal": "CID_ICALLS_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "15",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "Cost structure",
+                    "menuVal": "CS_ASOCC_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "12",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "IVR containment, utilization and productivity",
+                    "menuVal": "IVR_COMPLETION_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "24",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "CSAT data",
+                    "menuVal": "CS_ASA_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "14",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "Revenue data",
+                    "menuVal": "RO_ECR_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "9",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "People data",
+                    "menuVal": "P_TR_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "19",
+                    "intialUponTtl": "/"
+                }]
+            },
+            "rightData": [{
+                    "readdOnly": false,
+                    "catType": 1,
+                    "heading": "Organizational details",
+                    "subheading": "Footprint",
+                    "categoryHeading": "Footprint by geo, economy, service type and size",
+                    "questions": [{
+                            "optionName": "Geographic",
+                            "type": "dd",
+                            "placeholder": "Please select",
+                            "description": "this is some description",
+                            "selectedId": "id1",
+                            "options": [{
+                                    "ddName": "Something sdfsdf",
+                                    "ddId": "id1"
+                                },
+                                {
+                                    "ddName": "Something2fsdf",
+                                    "ddId": "id2"
+                                }
+                            ]
+        
+                        },
+                        {
+                            "optionName": "City",
+                            "type": "txt",
+                            "placeholder": "Enter the value",
+                            "description": "this is some description",
+                            "selectedText": "This is some text alrady written",
+                            "selectedId": "id3"
+                        },
+                        {
+                            "optionName": "Annual Customer base",
+                            "type": "num",
+                            "placeholder": "Enter the value",
+                            "description": "this is some description",
+                            "selectedText": "9999999999",
+                            "selectedId": "id4",
+                            "afterText": "$",
+                            "maxLength": 10
+                        }
+                    ]
+                },
+                {
+                    "readdOnly": false,
+                    "catType": 2,
+                    "heading": "Call details",
+                    "subheading": "calls/integration details",
+                    "questions": [{
+                            "questionHeading": "Annual inbound calls",
+                            "quesLength": 1,
+                            "options": [{
+                                "optionName": "Inbound-calls-agent handled only",
+                                "type": "num",
+                                "description": "this is some description",
+                                "placeholder":"Please enter a value",
+                                "selectedText": "9999999999",
+                                "selectedId": "id4",
+                                "afterText": "$",
+                                "maxLength": 10
+                            }]
+                        },
+                        {
+                            "questionHeading": "Annual inbound emails",
+                            "quesLength": 1,
+                            "options": [{
+                                "optionName": "Inbound - emails - agent handled only ",
+                                "type": "num",
+                                "placeholder":"Please enter a value",
+                                "description": "this is some description",
+                                "selectedText": "9999999999",
+                                "selectedId": "id1_2",
+                                "afterText": "$",
+                                "maxLength": 10
+                            }]     
+        
+                        },
+                        {
+                            "questionHeading": "Annual inbound emails",
+                            "quesLength": 1,
+                            "options": [{
+                                "optionName": "Inbound - emails - agent handled only ",
+                                "type": "num",
+                                "placeholder":"Please enter a value",
+                                "description": "this is some description",
+                                "selectedText": "9999999999",
+                                "selectedId": "id1_3",
+                                "afterText": "$",
+                                "maxLength": 10
+                            }]     
+        
+                        },
+                        {
+                            "questionHeading": "Annual inbound emails",
+                            "quesLength": 1,
+                            "options": [{
+                                "optionName": "Inbound - emails - agent handled only ",
+                                "type": "dd",
+                                "description": "this is some description",
+                                "placeholder":"Please select a value",
+                                "selectedText": "9999999999",
+                                "selectedId": "id1_4",
+                                "afterText": "$",
+                                "maxLength": 10,
+                                "options": [{
+                                    "ddName": "Something sdfsdf",
+                                    "ddId": "id1"
+                                },
+                                {
+                                    "ddName": "Something2fsdf",
+                                    "ddId": "id2"
+                                }
+                            ]
+                            }                      
+                            
+                            ]     
+        
+                        },
+                        {
+                            "questionHeading": "Ifsefsenbound calls volumen mix- please provide site",
+                            "quesLength": 2,
+                            "options": [{
+                                    "optionName": "fvgesfv vgfasdf wdf fsaes f",
+                                    "type": "num",
+                                    "description": "this is some description",
+                                    "selectedText": "9999999999",
+                                    "selectedId": "id5",
+                                    "afterText": "$",
+                                    "maxLength": 10
+                                },
+                                {
+                                    "optionName": "Customer service...",
+                                    "type": "num",
+                                    "description": "this is some description",
+                                    "selectedText": "9999999999",
+                                    "selectedId": "id5",
+                                    "afterText": "%",
+                                    "maxLength": 10
+                                }
+                            ]
+        
+                        }
+                    ]
+                }
+            ],
+            "progressData": {
+                "answerTxt": "Answered",
+                "answrdQues": "0",
+                "of": "of",
+                "totalQues": "11",
+                "percentge": "0",
+                "saveTxt": "Save",
+                "sveVal": "FP_GEO_DD",
+                "submitTxt": "Submit",
+                "submitVal": "Sub_Thank"
+            },
+            "footerData": {
+                "prevTxt": "Previous",
+                "prevVal": "",
+                "forwardTxt": "Forward",
+                "forwardVal": "CID_ICALLS_INPNU",
+                "footerLogo": "https://e2eresearch.com/swteam/McKinsey/CC360_KPI_Project/mck-logo-footer.png",
+                "copyrghtTxt": "© 1996-2019 McKinsey & Company"
             }
-        ]
-			},
-		
-			"progressData": {
-				"answerTxt": "Answered",
-				"answrdQues": "0",
-				"of": "of",
-				"totalQues": "8",
-				"percentge": "10",
-				"saveTxt":"Save",
-				"sveVal":"1",
-				"submitTxt":"Submit",
-				"submitVal":"2"
-			},
-		
-			"footerData": {
-				"prevTxt": "Previous",
-				"prevVal": "1",
-				"forwardTxt": "Forward",
-                "forwardVal": "2",
-                "footerLogo": "https://e2eresearch.com/swteam/McKinsey/Assessment-app/mck-logo-footer.png",
-				"copyrghtTxt": "© 1996-2019 McKinsey & Company"
-			}
-		
-		
-		}
+        }
+    
+    </span>
+    <span id="jsonData" style="display: none">
+        {
+            "headerData": {
+                "logo": "https://e2eresearch.com/swteam/McKinsey/CC360_KPI_Project/mck-logo.svg",
+                "headerTitle": "CC 360 Assessment",
+                "leftPanelOpen": "false"
+            },
+            "leftData": {
+                "seltdVal": "",
+                "links": [{
+                    "menuTxt": "Organizational details",
+                    "menuVal": "FP_GEO_DD",
+                    "initialQAnsd": "0",
+                    "totalQues": "11",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "Call details",
+                    "menuVal": "CID_ICALLS_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "15",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "Cost structure",
+                    "menuVal": "CS_ASOCC_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "12",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "IVR containment, utilization and productivity",
+                    "menuVal": "IVR_COMPLETION_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "24",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "CSAT data",
+                    "menuVal": "CS_ASA_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "14",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "Revenue data",
+                    "menuVal": "RO_ECR_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "9",
+                    "intialUponTtl": "/"
+                }, {
+                    "menuTxt": "People data",
+                    "menuVal": "P_TR_INPNU",
+                    "initialQAnsd": "0",
+                    "totalQues": "19",
+                    "intialUponTtl": "/"
+                }]
+            },
+            "rightData": {
+                "readdOnly": false,
+                "ratingTxt": ["1-Considerable Improvement potential", "2-improvement potential", "3-Good Practice", "4-Best Practice"],
+                "cmntHeding": "Observation",
+                "cmntPlaceHolder": "Please enter your observation",
+                "naText": "Don't know",
+                "categories": [{
+                    "heading": "Strategy",
+                    "subCategories": [{
+                        "subHeading": "Strategic Clarity",
+                        "questions": [{
+                            "questionId": "str_1",
+                            "quesText": "Strategic Contact Clarity priority",
+                            "quesDescription": "Strategic Contact Clarity priority description. . . . ",
+                            "selected": "a1",
+                            "detailId": "obser_1",
+                            "detailVal": "This is sample value",
+                            "naId": "dk01",
+                            "options": [{
+                                "optionsId": "a1",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a2",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a3",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a4",
+                                "optionText": "Neither CC strategy is well defined"
+                            }]
+                        }, {
+                            "questionId": "str_2",
+                            "quesText": "Strategic Contact Clarity stability",
+                            "quesDescription": "Strategic Contact Clarity stability description. . . . ",
+                            "selected": "",
+                            "detailId": "obser_2",
+                            "detailVal": "",
+                            "naId": "dk02",
+                            "options": [{
+                                "optionsId": "a5",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a6",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a7",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a8",
+                                "optionText": "Neither CC strategy is well defined"
+                            }]
+                        }]
+                    }, {
+                        "subHeading": "Strategic Stability",
+                        "questions": [{
+                            "questionId": "str_3",
+                            "quesText": "Strategic Contact Clarity priority",
+                            "quesDescription": "Strategic Contact Clarity priority description. . . . ",
+                            "selected": "",
+                            "detailId": "obser_3",
+                            "detailVal": "",
+                            "naId": "dk03",
+                            "options": [{
+                                "optionsId": "a9",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a10",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a11",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a12",
+                                "optionText": "Neither CC strategy is well defined"
+                            }]
+                        }, {
+                            "questionId": "str_4",
+                            "quesText": "Strategic Contact Clarity stability",
+                            "quesDescription": "Strategic Contact Clarity stability description. . . . ",
+                            "selected": "",
+                            "detailId": "obser_4",
+                            "detailVal": "",
+                            "naId": "dk04",
+                            "options": [{
+                                "optionsId": "a13",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a14",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a15",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a16",
+                                "optionText": "Neither CC strategy is well defined"
+                            }]
+                        }]
+                    }]
+                }, {
+                    "heading": "Observation",
+                    "subCategories": [{
+                        "subHeading": "Observation Clarity",
+                        "questions": [{
+                            "questionId": "ob_1",
+                            "quesText": "Strategic Contact Clarity priority",
+                            "quesDescription": "Strategic Contact Clarity priority description. . . . ",
+                            "selected": "",
+                            "detailId": "obser_5",
+                            "detailVal": "",
+                            "naId": "dk05",
+                            "options": [{
+                                "optionsId": "a17",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a18",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a19",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a20",
+                                "optionText": "Neither CC strategy is well defined"
+                            }]
+                        }, {
+                            "questionId": "ob_2",
+                            "quesText": "Strategic Contact Clarity stability",
+                            "quesDescription": "Strategic Contact Clarity stability description. . . . ",
+                            "selected": "",
+                            "detailId": "obser_6",
+                            "detailVal": "",
+                            "naId": "dk06",
+                            "options": [{
+                                "optionsId": "a21",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a22",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a23",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a24",
+                                "optionText": "Neither CC strategy is well defined"
+                            }]
+                        }]
+                    }, {
+                        "subHeading": "Strategic Stability",
+                        "questions": [{
+                            "questionId": "ob_3",
+                            "quesText": "Strategic Contact Clarity priority",
+                            "quesDescription": "Strategic Contact Clarity priority description. . . . ",
+                            "selected": "",
+                            "detailId": "obser_7",
+                            "detailVal": "",
+                            "naId": "dk07",
+                            "options": [{
+                                "optionsId": "a25",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a26",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a27",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a28",
+                                "optionText": "Neither CC strategy is well defined"
+                            }]
+                        }, {
+                            "questionId": "ob_4",
+                            "quesText": "Strategic Contact Clarity stability",
+                            "quesDescription": "Strategic Contact Clarity stability description. . . . ",
+                            "selected": "",
+                            "detailId": "obser_8",
+                            "detailVal": "",
+                            "naId": "dk08",
+                            "options": [{
+                                "optionsId": "a29",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a30",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a31",
+                                "optionText": "Neither CC strategy is well defined"
+                            }, {
+                                "optionsId": "a32",
+                                "optionText": "Neither CC strategy is well defined"
+                            }]
+                        }]
+                    }]
+                }]
+            },
+            "progressData": {
+                "answerTxt": "Answered",
+                "answrdQues": "0",
+                "of": "of",
+                "totalQues": "11",
+                "percentge": "0",
+                "saveTxt": "Save",
+                "sveVal": "FP_GEO_DD",
+                "submitTxt": "Submit",
+                "submitVal": "Sub_Thank"
+            },
+            "footerData": {
+                "prevTxt": "Previous",
+                "prevVal": "",
+                "forwardTxt": "Forward",
+                "forwardVal": "CID_ICALLS_INPNU",
+                "footerLogo": "https://e2eresearch.com/swteam/McKinsey/CC360_KPI_Project/mck-logo-footer.png",
+                "copyrghtTxt": "© 1996-2019 McKinsey & Company"
+            }
+        }
+    
+    </span>
+            
 
-</span>
 
 
 
 
-<input style="display:none;" type="text" name="navText" id="navText" />
-<!-- <input style="display:block;position: absolute;top: 10px;z-index: 999;" type="text" name="navText" id="navText" /> -->
-<!-- <input style="display:none;" type="text" name="selectedLink" id="selectedLink" /> -->
-<div style="display:none;" class="navigationarea">
-<input type="submit" id="forwardbutton" name="__fwd" tabindex="9998" class="navbutton confirmit-nav" onclick=" if(typeof wix=='object') {wix.nav(event, 'p1862356818');} " value="  >>  "></div>
-
-<!-- <input type="text" id="obser_1"  style="position:fixed;top:5px;z-index:10;"/> -->
 
 
-<script src="https://e2eresearch.com/swteam/McKinsey/Assessment-app/vue.js" type="text/javascript"></script>
-<script src="https://e2eresearch.com/swteam/McKinsey/Assessment-app/questionpage.js" type="text/javascript"></script>
+<input class="el1" type="text" name="navText" id="navText" />
+<input class="el2 left-panel-open" name="left-panel-open" />
+<input class="el3 left-panel-menu-slctn" id="left-panel-menu-slctn" name="currentTab" />
+<input class="el4 left-panel-subMenu-slctn" id="left-panel-subMenu-slctn"  name="currentSubTab" />
+<input class="el5 ttl-attmpt" id="ttl-attmpt"  name="currentSubTab" />
+<input class="el6 cur-prcntge" id="cur-prcntge"  name="currentSubTab" />
+
+<!-- <div style="display:none;" class="navigationarea"></div> -->
+<input type="hidden" id="forwardbutton" name="__fwd" tabindex="9998" class="navbutton confirmit-nav" onclick=" if(typeof wix=='object') {wix.nav(event, 'p1862356818');} " value="  >>  ">
+
+<div style="position:fixed;top:10px;z-index:999999;background:blue;color:white;display:none;">
+    <input type="radio" id="a1" name="gender" value="male">
+    <label for="male">Male</label><br>
+    <input type="radio" id="a2" name="gender" value="female">
+    <label for="female">Female</label><br>
+    <input type="radio" id="a3" name="gender" value="other">
+    <label for="other">Other</label>
+    <input type="radio" id="a4" name="gender" value="other">
+    <label for="other">Other_1</label>
+    <input type="radio" id="dk01" name="gender" value="other">
+    <label for="other">dk01</label>
+    <input type="text" id="obser_1">
+
+</br>
+
+    <input type="radio" id="a5" name="someelse" value="male">
+    <label for="male">Male</label><br>
+    <input type="radio" id="a6" name="someelse" value="female">
+    <label for="female">Female</label><br>
+    <input type="radio" id="a7" name="someelse" value="other">
+    <label for="other">Other</label>
+    <input type="radio" id="a8" name="someelse" value="other">
+    <label for="other">Other_1</label>
+    <input type="radio" id="dk02" name="someelse" value="other">
+    <label for="other">dk02</label>
+    <input type="text" id="obser_2">
+</div>
+
+
+<script src="dist/js/vendor/vue.js" type="text/javascript"></script>
+<script src="./dist/js/vendor/OverlayScrollbars.min.js"></script>
+<script src="dist/js/production/questionpage.js" type="text/javascript"></script>
 
 
 </body>
 
+<style>
+    .el1,.el2,.el3,.el4{
+        position:fixed;
+        top:5px;
+        left:0px;
+        z-index:9999;
+    }
+    .el2{
+        position:fixed;
+        top:5px;
+        left:100px;
+        z-index:9999;
+    }
+    .el3{
+        position:fixed;
+        top:5px;
+        left:200px;
+        z-index:9999;
+    }
+    .el4{
+        position:fixed;
+        top:5px;
+        left:300px;
+        z-index:9999;
+    }
+    .el5{
+        position:fixed;
+        top:5px;
+        left:400px;
+        z-index:9999;
+    }
+    .el6{
+        position:fixed;
+        top:5px;
+        left:500px;
+        z-index:9999;
+    }
+</style>
+
 
 </html>
-
-
