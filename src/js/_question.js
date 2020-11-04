@@ -1,6 +1,89 @@
 Vue.component("right-panel", {
   props: ["rightData", "progressData", "leftData"],
+  template: `
+  <div class="right-panel-wrapper">
+  <div class="right-panel clearfix">
+    <progress-panel ref="prsPanel" :progress-data="progressData"></progress-panel>
+    <div class="survey-wrapper"> 
+      <div class="scrollable">
+      <div class="questions-inner" v-for="qType of rightData" v-if="qType.catType ===1">
+          <h2 class="ques-heading" v-html='qType.heading'></h2>
+          <div class="question-type1">
+            <h4 class="sub-heading" v-html='qType.subheading'></h4>
+            <p class="question-line" v-html='qType.categoryHeading'></p>
+            <div class="question-row" v-for="question of qType.questions">
+              <div class="question-group" v-if="question.type=='dd'">
+                <div class="text-label"><span v-html='question.optionName'></span> 
+                  <span class="tooltips">
+                      <div class="tooltip">
+                        <span class="custom-infoicon"></span>
+                        <span class="tooltiptext" >dd</span>
+                      </div>
+                  </span>
+                </div>
+                <div class="input-box">
+                  <select class="cst-form-control">
+                    <option disabled v-html="question.placeholder" selected></option>
+                    <option v-for="option of question.options" v-html="option.ddName" :id="option.ddId"></option>
+                  </select>
+                </div>
+              </div>
 
+              <div class="question-group" v-if="question.type=='txt' || question.type=='num'">
+                <div class="text-label"><span v-html="question.optionName"></span>
+                  <span class="tooltips">
+                    <div class="tooltip">
+                      <span class="custom-infoicon"></span>
+                      <span class="tooltiptext" v-html="question.description"></span>
+                    </div>
+                  </span>
+                </div>
+                <div class="input-box">
+                  <input type="text" class="cst-form-control" :placeholder="question.placeholder" :id="question.selectedId" />
+                </div>
+              </div>
+            </div>            
+          
+          </div>          
+        </div>
+   
+        <div class="questions-inner" v-for="qType of rightData" v-if="qType.catType ===2">
+          <h2 class="ques-heading" v-html='qType.heading'></h2>
+          <div class="question-type2" >
+            <h4 class="sub-heading" v-html='qType.subheading'></h4>           
+            <div class="question-row" v-for="question of qType.questions" :class="{'wide': question.quesLength>1 }">                          
+
+            <div class="question-line" v-html='question.questionHeading'></div>
+              <div class="question-group" v-for="option of question.options">
+                <div class="text-label"><span v-html='option.optionName'></span>
+                  <span class="tooltips">
+                      <div class="tooltip">
+                        <span class="custom-infoicon"></span>
+                        <span class="tooltiptext" v-html="option.description"></span>
+                      </div>
+                  </span>
+                </div>
+                <div class="input-box">
+                  <input :id="option.selectedId" >
+                  <input v-if="option.type=='num' || option.type=='txt'" type="text" :placeholder="option.placeholder"
+                  class="cst-form-control"  :value="option.selectedText" @input="handleInput(option.selectedId, 10, $event)">
+
+                  <select v-if="option.type=='dd' " class="cst-form-control">
+                      <option disabled v-html="option.placeholder" selected></option>
+                      <option v-for="quesOption of option.options" v-html="quesOption.ddName" ></option>
+                    </select>
+                </div>
+              </div>
+            </div>
+            
+          </div>          
+        </div> 
+
+      </div>
+    </div>
+  </div>
+</div>
+  `,
   mounted: function () {
     this.setHeight();
     window.addEventListener("resize", this.setHeight);
@@ -22,32 +105,23 @@ Vue.component("right-panel", {
     handleInput: function (id, length, type, e) {
       let val = e.target.value.trim();
       let valArr = val.split("");
+      console.log(val, id, length);
 
-      if (type == "num") {
-        if (isNaN(val)) {
-          val = valArr.filter((ch) => !isNaN(ch)).join("");
-        }
-        console.log(val);
-        const elem = document.getElementById(id);
-        if (val.split("").length <= length) {
-          elem.value = val;
-        } else {
-          valArr.pop();
-          elem.value = val;
-          e.target.value = val;
-        }
-      } else {
-        // let valArr = val.split("");
-        // const elem = document.getElementById(id);
-        // if (valArr.length <= length) {
-        //   console.log(e.target.value, id, length);
-        //   elem.value = e.target.value;
-        // } else {
-        //   valArr.pop();
-        //   elem.value = valArr.join("");
-        //   e.target.value = valArr.join("");
-        // }
-      }
+      // if (type == "num") {
+      //   if (isNaN(val)) {
+      //     val = valArr.filter((ch) => !isNaN(ch)).join("");
+      //   }
+      //   console.log(val);
+      //   const elem = document.getElementById(id);
+      //   if (val.split("").length <= length) {
+      //     elem.value = val;
+      //   } else {
+      //     valArr.pop();
+      //     elem.value = val;
+      //     e.target.value = val;
+      //   }
+      // } else {
+      // }
     },
 
     handleKeyDown: function (catIn, subCatIn, quesInd, ques_id, e) {
