@@ -22,7 +22,7 @@ Vue.component("right-panel", {
                   </span>
                 </div>
                 <div class="input-box">
-                <input v-for="option of question.options"  :name="qType.catType+'_'+quesIndex" type="radio" :value="option.ddId" :id="option.ddId" />
+             
                   <select class="cst-form-control" @change="handleSelect(qType.catType, quesIndex, null, $event)">
                     <option disabled v-html="question.placeholder" selected></option>
                     <option v-for="option of question.options" v-html="option.ddName" :value="option.ddId">                   
@@ -41,9 +41,9 @@ Vue.component("right-panel", {
                   </span>
                 </div>
                 <div class="input-box">
-                <input :id="question.selectedId"/>
                   <input type="text" class="cst-form-control" :placeholder="question.placeholder" @input="handleInput(question,qType.catType,quesIndex,null ,$event)" :value="question.selectedText" />
                 </div>
+                <div v-html="question.afterText" class="after-text"></div>
               </div>
             </div>            
           
@@ -67,12 +67,12 @@ Vue.component("right-panel", {
                   </span>
                 </div>
                 <div class="input-box">
-                  <input v-if="option.type=='num' || option.type=='txt'" :id="option.selectedId" >
+          
                   <input v-if="option.type=='num' || option.type=='txt'" type="text" :placeholder="option.placeholder"
                   class="cst-form-control"  :value="option.selectedText"e @input="handleInput(option,qType.catType, quesIndex,optionIndex ,$event)">
+                  <div  v-if="option.type=='num' || option.type=='txt'" type="text" v-html="option.afterText" class="after-text"></div>
 
 
-                  <input v-if="option.type=='dd' " v-for="quesOption of option.options"  :name="qType.catType+'_'+quesIndex" type="radio" :id="quesOption.ddId" />
                   <select v-if="option.type=='dd' " class="cst-form-control" @change="handleSelect(qType.catType, quesIndex,optionIndex,$event)">
                       <option disabled v-html="option.placeholder" selected></option>
                       <option v-for="quesOption of option.options" v-html="quesOption.ddName" :value="quesOption.ddId" ></option>
