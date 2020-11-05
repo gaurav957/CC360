@@ -1,4 +1,3 @@
-
 Vue.component("header-panel", {
   props: ["headerData"],
   template: `<div class="header-wrapper">
@@ -20,26 +19,30 @@ Vue.component("header-panel", {
 				</div>
 			</div>`,
   methods: {
-	toggle:function(){
-		if(this.headerData.leftPanelOpen == 'false'){
-			this.headerData.leftPanelOpen = 'true';
-			document.getElementById("main-wrapper").classList.add("toggled");
-		}else{
-			this.headerData.leftPanelOpen = 'false';
-			document.getElementById("main-wrapper").classList.remove("toggled");
-		}
-		document.querySelector(".left-panel-open").value = this.headerData.leftPanelOpen;
-		setTimeout(()=>{this.$parent.updateRightHeight();},300);//calling parent
-	}
+    toggle: function () {
+      if (this.headerData.leftPanelOpen == "false") {
+        this.headerData.leftPanelOpen = "true";
+        document.getElementById("main-wrapper").classList.add("toggled");
+      } else {
+        this.headerData.leftPanelOpen = "false";
+        document.getElementById("main-wrapper").classList.remove("toggled");
+      }
+      document.querySelector(
+        ".left-panel-open"
+      ).value = this.headerData.leftPanelOpen;
+      // setTimeout(()=>{this.$parent.updateRightHeight();},300);//calling parent
+    },
   },
-  mounted:function(){
-	  //console.log(this.headerData.leftPanelOpen == 'true')
-	if(this.headerData.leftPanelOpen == 'true'){
-		document.getElementById("main-wrapper").classList.add("toggled");
-	}else{
-		document.getElementById("main-wrapper").classList.remove("toggled");
-	} 
+  mounted: function () {
+    //console.log(this.headerData.leftPanelOpen == 'true')
+    if (this.headerData.leftPanelOpen == "true") {
+      document.getElementById("main-wrapper").classList.add("toggled");
+    } else {
+      document.getElementById("main-wrapper").classList.remove("toggled");
+    }
 
-	document.querySelector(".left-panel-open").value = this.headerData.leftPanelOpen;
-  }
+    document.querySelector(
+      ".left-panel-open"
+    ).value = this.headerData.leftPanelOpen;
+  },
 });
