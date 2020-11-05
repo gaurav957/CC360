@@ -145,12 +145,12 @@ Vue.component("right-panel", {
       document.getElementById(e.target.value).click();
     },
 
-    handleInput: function (question, catType, quesIndex, optionIndex, e) { //input boxes text and number
+    handleInput: function (question, catType, quesIndex, optionIndex, e) {
       // debugger;
-
+      console.log(question.maxRange, question.minRange);
       let { type, maxLength, selectedId } = question;
       let val, valArr;
-
+ 
       if (type == "num") {
         val = e.target.value.trim();
         valArr = val.split("");
@@ -158,11 +158,15 @@ Vue.component("right-panel", {
           valArr = valArr.filter((ch) => !isNaN(ch));
         }
       }
-
+ 
       if (type == "txt") {
         val = e.target.value;
         valArr = val.split("");
         valArr = valArr.filter((ch) => /^[a-zA-Z\s]*$/.test(ch));
+      }
+ 
+      if (Number(valArr.join("")) > question.maxRange) {
+        valArr.pop();
       }
       if (valArr.length > maxLength) {
         if (valArr[valArr.length - 1] == " ") {
@@ -171,9 +175,9 @@ Vue.component("right-panel", {
           valArr.pop();
         }
       }
-
+ 
       val = valArr.join("");
-
+ 
       if (catType == 1) {
         this.rightData.forEach((category) => {
           if (category.catType == 1) {
@@ -192,7 +196,7 @@ Vue.component("right-panel", {
       }
       this.updateProgressData();
       e.target.value = val;
-
+ 
       document.getElementById(selectedId).value = val;
     },
 

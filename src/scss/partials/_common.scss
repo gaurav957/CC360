@@ -129,6 +129,7 @@ p{
     padding: 6px 12px;
     font-size: 1em;
     color: $drak-gray;  
+    padding-right: 30px;
    @include box-shadow(0, 1PX, 1PX,  rgba(0,0,0,.075), inset);   
    @include transition(border-color .15s ease-in-out, box-shadow .15s ease-in-out);
     &:focus{

@@ -337,12 +337,17 @@
   // max-height: calc(100vh - 355px);
 
   //  height: calc(100vh - 300px);
-  .scrollable {
+  .scrollable{
     padding-right: 25px;
-    // height: calc(100vh - 340px);
-    height: calc(100vh - 285px);
+    height: calc(100vh - 250px);
     overflow-y: auto;
-  }
+    @media (max-width:1024px){
+        height: calc(100vh - 280px);
+    }
+    @media (max-width:480px){
+        padding-right: 16px;
+    }
+ }
 }
 
 .accordion.active + .accordion-panel {
@@ -490,4 +495,15 @@
     background: #2251ff;
     color: $white;
   }
+}
+
+.tt-ans{
+  color: $btn-border;
+  font-weight: bold;
+  background: $e1-clr;
+  padding: 9px 15px;
+  font-size: 15px;
+   @media (min-width:481px){
+      margin-right: 10px;
+   }
 }
