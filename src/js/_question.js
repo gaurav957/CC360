@@ -11,7 +11,7 @@ Vue.component("right-panel", {
           <div class="question-type1">
             <h4 class="sub-heading" v-html='qType.subheading'></h4>
             <p class="question-line" v-html='qType.categoryHeading'></p>
-            <div class="question-row" v-for="question of qType.questions">
+            <div class="question-row" v-for="(question,quesIndex) of qType.questions">
               <div class="question-group" v-if="question.type=='dd'">
                 <div class="text-label"><span v-html='question.optionName'></span> 
                   <span class="tooltips">
@@ -22,9 +22,11 @@ Vue.component("right-panel", {
                   </span>
                 </div>
                 <div class="input-box">
-                  <select class="cst-form-control" @change="handleSelect(232,$event)">
+                <input v-for="option of question.options"  :name="qType.catType+'_'+quesIndex" type="radio" :value="option.ddId" :id="option.ddId" />
+                  <select class="cst-form-control" @change="handleSelect(qType.catType, quesIndex, null, $event)">
                     <option disabled v-html="question.placeholder" selected></option>
-                    <option v-for="option of question.options" v-html="option.ddName" :value="option.ddId"></option>
+                    <option v-for="option of question.options" v-html="option.ddName" :value="option.ddId">                   
+                    </option>
                   </select>
                 </div>
               </div>
@@ -40,7 +42,7 @@ Vue.component("right-panel", {
                 </div>
                 <div class="input-box">
                 <input :id="question.selectedId"/>
-                  <input type="text" class="cst-form-control" :placeholder="question.placeholder" @input="handleInput(question,catType,quesIndex,optionIndex ,$event)" />
+                  <input type="text" class="cst-form-control" :placeholder="question.placeholder" @input="handleInput(question,qType.catType,quesIndex,null ,$event)" :value="question.selectedText" />
                 </div>
               </div>
             </div>            
@@ -65,11 +67,13 @@ Vue.component("right-panel", {
                   </span>
                 </div>
                 <div class="input-box">
-                  <input :id="option.selectedId" >
+                  <input v-if="option.type=='num' || option.type=='txt'" :id="option.selectedId" >
                   <input v-if="option.type=='num' || option.type=='txt'" type="text" :placeholder="option.placeholder"
-                  class="cst-form-control"  :value="option.selectedText"e @input="handleInput(option.selectdId, option.maxLength,option.type,quesIndex,optionIndex ,$event)">
+                  class="cst-form-control"  :value="option.selectedText"e @input="handleInput(option,qType.catType, quesIndex,optionIndex ,$event)">
 
-                  <select v-if="option.type=='dd' " class="cst-form-control" @change="handleSelect($event)">
+
+                  <input v-if="option.type=='dd' " v-for="quesOption of option.options"  :name="qType.catType+'_'+quesIndex" type="radio" :id="quesOption.ddId" />
+                  <select v-if="option.type=='dd' " class="cst-form-control" @change="handleSelect(qType.catType, quesIndex,optionIndex,$event)">
                       <option disabled v-html="option.placeholder" selected></option>
                       <option v-for="quesOption of option.options" v-html="quesOption.ddName" :value="quesOption.ddId" ></option>
                     </select>
@@ -103,33 +107,75 @@ Vue.component("right-panel", {
       }
     },
 
-    handleSelect: function (id, e) {
-      console.log(id, e.target.value);
+    handleSelect: function (catType, quesIndex, optionIndex, e) {
+      console.log(e.target.value, catType, quesIndex, optionIndex);
+      if (catType == 1) {
+        this.rightData.forEach((category) => {
+          if (category.catType == 1) {
+            category.questions[quesIndex].selectedId = e.target.value;
+          }
+        });
+      }
+      if (catType == 2) {
+        this.rightData.forEach((category) => {
+          if (category.catType == 2) {
+            category.questions[quesIndex].options[optionIndex].selectedId =
+              e.target.value;
+          }
+        });
+      }
       document.getElementById(e.target.value).click();
+      console.log(this.rightData);
     },
 
     handleInput: function (question, catType, quesIndex, optionIndex, e) {
-      let { type, maxLength, selectdId } = question;
-      let val = e.target.value.trim();
-      let valArr = val.split("");
+      let { type, maxLength, selectedId } = question;
+      let val, valArr;
 
       if (type == "num") {
+        val = e.target.value.trim();
+        valArr = val.split("");
         if (isNaN(val)) {
           valArr = valArr.filter((ch) => !isNaN(ch));
         }
       }
 
-      if (valArr.length > maxLength) {
-        valArr.pop();
+      if (type == "txt") {
+        val = e.target.value;
+        valArr = val.split("");
+        valArr = valArr.filter((ch) => /^[a-zA-Z\s]*$/.test(ch));
+        console.log(valArr);
       }
-      val = valArr.join("");
-      document.getElementById(selectdId).value = val;
-      e.target.value = val;
-      this.rightData.forEach((data) => {
-        if (data.catType == catType) {
-          data.questions[quesIndex].options[optionIndex].selectedText = val;
+      if (valArr.length > maxLength) {
+        if (valArr[valArr.length - 1] == " ") {
+          valArr = valArr.join("").trim().split("");
+        } else {
+          valArr.pop();
         }
-      });
+      }
+
+      val = valArr.join("");
+      document.getElementById(selectedId).value = val;
+      e.target.value = val;
+
+      if (catType == 1) {
+        this.rightData.forEach((category) => {
+          if (category.catType == 1) {
+            category.questions[quesIndex].selectedText = val;
+          }
+        });
+      }
+      if (catType == 2) {
+        this.rightData.forEach((category) => {
+          if (category.catType == 2) {
+            category.questions[quesIndex].options[
+              optionIndex
+            ].selectedText = val;
+          }
+        });
+      }
+
+      console.log(this.rightData);
     },
 
     handleKeyDown: function (catIn, subCatIn, quesInd, ques_id, e) {
