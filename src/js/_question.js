@@ -125,7 +125,7 @@ Vue.component("right-panel", {
       }
     },
 
-    handleSelect: function (catType, quesIndex, optionIndex, e) {
+    handleSelect: function (catType, quesIndex, optionIndex, e) { //dropdown
       if (catType == 1) {
         this.rightData.forEach((category) => {
           if (category.catType == 1) {
@@ -145,7 +145,7 @@ Vue.component("right-panel", {
       document.getElementById(e.target.value).click();
     },
 
-    handleInput: function (question, catType, quesIndex, optionIndex, e) {
+    handleInput: function (question, catType, quesIndex, optionIndex, e) { //input boxes text and number
       // debugger;
 
       let { type, maxLength, selectedId } = question;
@@ -242,36 +242,36 @@ Vue.component("right-panel", {
       this.$refs.prsPanel.updateProgresbar(totalAttempted); //calling child component
     },
 
-    handleKeyDown: function (catIn, subCatIn, quesInd, ques_id, e) {
-      this.rightData.categories[catIn].subCategories[subCatIn].questions[
-        quesInd
-      ].detailVal = e.target.value;
-      if (document.getElementById(ques_id)) {
-        document.getElementById(ques_id).value = e.target.value;
-      }
-    },
-    handleAnswerSelect: function (dataId, catIn, subCatIn, quesInd) {
-      this.rightData.categories[catIn].subCategories[subCatIn].questions[
-        quesInd
-      ].selected = dataId;
-      if (document.getElementById(dataId)) {
-        document.getElementById(dataId).click();
-      }
+    // handleKeyDown: function (catIn, subCatIn, quesInd, ques_id, e) {
+    //   this.rightData.categories[catIn].subCategories[subCatIn].questions[
+    //     quesInd
+    //   ].detailVal = e.target.value;
+    //   if (document.getElementById(ques_id)) {
+    //     document.getElementById(ques_id).value = e.target.value;
+    //   }
+    // },
+    // handleAnswerSelect: function (dataId, catIn, subCatIn, quesInd) {
+    //   this.rightData.categories[catIn].subCategories[subCatIn].questions[
+    //     quesInd
+    //   ].selected = dataId;
+    //   if (document.getElementById(dataId)) {
+    //     document.getElementById(dataId).click();
+    //   }
 
-      let ttlAttempt = 0;
-      for (let category of this.rightData.categories) {
-        for (let subCat of category.subCategories) {
-          for (let question of subCat.questions) {
-            if (question.selected != "") {
-              ttlAttempt++;
-            }
-          }
-        }
-      }
+    //   let ttlAttempt = 0;
+    //   for (let category of this.rightData.categories) {
+    //     for (let subCat of category.subCategories) {
+    //       for (let question of subCat.questions) {
+    //         if (question.selected != "") {
+    //           ttlAttempt++;
+    //         }
+    //       }
+    //     }
+    //   }
 
-      this.$parent.updateLeftQuestionAttempt(ttlAttempt); //calling parent
-      this.$refs.prsPanel.updateProgresbar(ttlAttempt); //calling child component
-    },
+    //   this.$parent.updateLeftQuestionAttempt(ttlAttempt); //calling parent
+    //   this.$refs.prsPanel.updateProgresbar(ttlAttempt); //calling child component
+    // },
     // setHeight: function () {
     //   var surRows = document.getElementsByClassName("survey-row");
     //   for (let surRow of surRows) {
@@ -318,6 +318,14 @@ Vue.component("right-panel", {
         e.target.parentNode.classList.add("tooltip-show");
       }
     },
+    setScrollHeight: () => {
+      let instance = OverlayScrollbars(
+        document.querySelector(".scrollable"),
+        {}
+      );
+      let scrollHeight = instance.scroll().position.y;
+      document.getElementById("scroll-value").value = scrollHeight;
+    },
   },
 });
 
@@ -349,7 +357,7 @@ Vue.component("progress-panel", {
                 </div>
             </div>
             <div class='btn-outer'>
-                    <div class='btn-item save' v-html='progressData.saveTxt' @click=savePage>Save</div>
+                    <div class='btn-item save' v-html='progressData.saveTxt' @click=savePage()>Save</div>
                     <div class='btn-item submit' :class="this.submitStatus == false?'disable':''" @click=checkSubmitStatus(this.submitStatus) v-html='progressData.submitTxt' >Submit</div>
             </div>
         </div>
@@ -361,14 +369,6 @@ Vue.component("progress-panel", {
     document.querySelector("#cur-prcntge").value = this.progressData.percentge;
   },
   methods: {
-    setScrollHeight: () => {
-      let instance = OverlayScrollbars(
-        document.querySelector(".scrollable"),
-        {}
-      );
-      let scrollHeight = instance.scroll().position.y;
-      document.getElementById("scroll-value").value = scrollHeight;
-    },
 
     nextPage: function (forwardBtnVal) {
       document.getElementById("left-panel-menu-slctn").value = forwardBtnVal;
@@ -376,7 +376,6 @@ Vue.component("progress-panel", {
     },
     savePage: function () {
       this.$parent.setScrollHeight(); //calling parent
-
       document.getElementById("forwardbutton").click();
     },
     updateProgresbar: function (ttlAttempt) {
