@@ -1,13 +1,12 @@
-
 Vue.component("footer-panel", {
   props: ["footerData"],
   data: function () {
     return {
       nextEnable: true,
       prevEnable: true,
-      intialQuestions:0,
-      totalQuestions:0
-    }
+      intialQuestions: 0,
+      totalQuestions: 0,
+    };
   },
   template: `<div class="footer clearfix">
   <div class="navigation-block clearfix">
@@ -20,21 +19,21 @@ Vue.component("footer-panel", {
   <div class="copyright-block clearfix"><div class="footer-mck f-left"><img :src="footerData.footerLogo" alt="" title=""></div><div class="copy-rt r-right" v-html=footerData.copyrghtTxt></div></div>
 </div>`,
   methods: {
-    nextPage:function(){
-      this.$parent.NextPageBtnClckParent();//calling parent
+    nextPage: function () {
+      this.$parent.NextPageBtnClckParent(); //calling parent
     },
-    PrevPage:function(){
-      this.$parent.PrevPageBtnClckParent();//calling parent
+    PrevPage: function () {
+      this.$parent.PrevPageBtnClckParent(); //calling parent
     },
-    disablePrev:function(){
+    disablePrev: function () {
       this.prevEnable = false;
     },
-    disableNext:function(){
+    disableNext: function () {
       this.nextEnable = false;
     },
-    setAllQuestions:function(totalAnswered,totalQuestions){
+    setAllQuestions: function (totalAnswered, totalQuestions) {
       this.intialQuestions = totalAnswered;
-      this.totalQuestions = totalQuestions
-    }
-  }
+      this.totalQuestions = totalQuestions;
+    },
+  },
 });

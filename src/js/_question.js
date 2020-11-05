@@ -16,7 +16,7 @@ Vue.component("right-panel", {
                 <div class="text-label"><span v-html='question.optionName'></span> 
                   <span class="tooltips">
                       <div class="tooltip">
-                        <span class="custom-infoicon"></span>
+                        <span class="custom-infoicon"  @click="toltiptoggle"></span>
                         <span class="tooltiptext" v-html="question.description"></span>
                       </div>
                   </span>
@@ -35,7 +35,7 @@ Vue.component("right-panel", {
                 <div class="text-label"><span v-html="question.optionName"></span>
                   <span class="tooltips">
                     <div class="tooltip">
-                      <span class="custom-infoicon"></span>
+                      <span class="custom-infoicon"  @click="toltiptoggle"></span>
                       <span class="tooltiptext" v-html="question.description"></span>
                     </div>
                   </span>
@@ -61,7 +61,7 @@ Vue.component("right-panel", {
                 <div class="text-label"><span v-html='option.optionName'></span>
                   <span class="tooltips">
                       <div class="tooltip">
-                        <span class="custom-infoicon"></span>
+                        <span class="custom-infoicon"  @click="toltiptoggle"></span>
                         <span class="tooltiptext" v-html="option.description"></span>
                       </div>
                   </span>
@@ -103,12 +103,23 @@ Vue.component("right-panel", {
         {}
       );
       // instance.scroll({ el: document.getElementById('hellomoto'), block : "center"}, 100);
-      let scrollHeight = this.rightData.scrollPosition;
+      let scrollHeight = this.rightData[0].scrollPosition;
+      console.log(this.rightData);
       if (scrollHeight == "") {
         scrollHeight = 0;
       }
       instance.scroll({ x: 0, y: scrollHeight }, 100);
       // setTimeout(function(){console.log(instance.scroll().position.y)},1000);
+    });
+
+    document.querySelectorAll(".custom-infoicon").forEach((elem) => {
+      // console.log(elem);
+      elem.addEventListener("blur", () => {
+        console.log("fsdf");
+        document
+          .querySelectorAll(".tooltip-show")
+          .forEach((elem) => elem.classList.remove("tooltip-show"));
+      });
     });
   },
   methods: {
@@ -125,7 +136,8 @@ Vue.component("right-panel", {
       }
     },
 
-    handleSelect: function (catType, quesIndex, optionIndex, e) { //dropdown
+    handleSelect: function (catType, quesIndex, optionIndex, e) {
+      //dropdown
       if (catType == 1) {
         this.rightData.forEach((category) => {
           if (category.catType == 1) {
@@ -150,7 +162,7 @@ Vue.component("right-panel", {
       console.log(question.maxRange, question.minRange);
       let { type, maxLength, selectedId } = question;
       let val, valArr;
- 
+
       if (type == "num") {
         val = e.target.value.trim();
         valArr = val.split("");
@@ -158,13 +170,13 @@ Vue.component("right-panel", {
           valArr = valArr.filter((ch) => !isNaN(ch));
         }
       }
- 
+
       if (type == "txt") {
         val = e.target.value;
         valArr = val.split("");
         valArr = valArr.filter((ch) => /^[a-zA-Z\s]*$/.test(ch));
       }
- 
+
       if (Number(valArr.join("")) > question.maxRange) {
         valArr.pop();
       }
@@ -175,9 +187,9 @@ Vue.component("right-panel", {
           valArr.pop();
         }
       }
- 
+
       val = valArr.join("");
- 
+
       if (catType == 1) {
         this.rightData.forEach((category) => {
           if (category.catType == 1) {
@@ -196,7 +208,7 @@ Vue.component("right-panel", {
       }
       this.updateProgressData();
       e.target.value = val;
- 
+
       document.getElementById(selectedId).value = val;
     },
 
@@ -315,7 +327,12 @@ Vue.component("right-panel", {
       this.$refs.prsPanel.enabDisSubmit(endis); //calling child component
     },
     toltiptoggle: (e) => {
-      //e.preventDefault();
+      //e.preventDefault();\
+
+      document
+        .querySelectorAll(".tooltip-show")
+        .forEach((elem) => elem.classList.remove("tooltip-show"));
+      const list = e.target.parentNode.classList;
       if (e.target.parentNode.classList.contains("tooltip-show")) {
         e.target.parentNode.classList.remove("tooltip-show");
       } else {
@@ -373,7 +390,6 @@ Vue.component("progress-panel", {
     document.querySelector("#cur-prcntge").value = this.progressData.percentge;
   },
   methods: {
-
     nextPage: function (forwardBtnVal) {
       console.log("called");
       document.getElementById("left-panel-menu-slctn").value = forwardBtnVal;

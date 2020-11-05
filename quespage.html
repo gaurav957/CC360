@@ -92,7 +92,9 @@
 					"selectedText": "",
 					"selectedId": "CID_ICALLS_INPNU",
 					"afterText": "#",
-					"maxLength": 5
+					"maxLength": 10,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}, {
 				"questionHeading": "Annual inbound emails",
@@ -105,7 +107,9 @@
 					"selectedText": "",
 					"selectedId": "CID_IEMAILS_INPNU",
 					"afterText": "#",
-					"maxLength": 5
+					"maxLength": 5,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}, {
 				"questionHeading": "Annual inbound chats",
@@ -118,7 +122,9 @@
 					"selectedText": "",
 					"selectedId": "CID_ICHAT_INPNU",
 					"afterText": "#",
-					"maxLength": 5
+					"maxLength": 5,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}, {
 				"questionHeading": "Outsourcing leverage for inbound calls",
@@ -131,7 +137,9 @@
 					"selectedText": "",
 					"selectedId": "CID_ICALLSO_INPNU",
 					"afterText": "#",
-					"maxLength": 5
+					"maxLength": 5,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}, {
 				"questionHeading": "Inbound call volume mix (agent handled) - please provide site wise",
@@ -144,7 +152,9 @@
 					"selectedText": "",
 					"selectedId": "CID_CS_INPNU",
 					"afterText": "%",
-					"maxLength": 3
+					"maxLength": 3,
+					"maxRange":100,
+					"minRange":0
 				}, {
 					"optionName": "Complaint handling",
 					"type": "num",
@@ -153,7 +163,9 @@
 					"selectedText": "",
 					"selectedId": "CID_CH_INPNU",
 					"afterText": "%",
-					"maxLength": 3
+					"maxLength": 3,
+					"maxRange":100,
+					"minRange":0
 				}, {
 					"optionName": "Technical helpdesk",
 					"type": "num",
@@ -162,7 +174,9 @@
 					"selectedText": "",
 					"selectedId": "CID_TH_INPNU",
 					"afterText": "%",
-					"maxLength": 3
+					"maxLength": 3,
+					"maxRange":100,
+					"minRange":0
 				}, {
 					"optionName": "Transaction or processing involved ",
 					"type": "num",
@@ -171,7 +185,9 @@
 					"selectedText": "",
 					"selectedId": "CID_TPI_INPNU",
 					"afterText": "%",
-					"maxLength": 3
+					"maxLength": 3,
+					"maxRange":100,
+					"minRange":0
 				}, {
 					"optionName": "Response to direct marketing ",
 					"type": "num",
@@ -180,7 +196,9 @@
 					"selectedText": "",
 					"selectedId": "CID_RDM_INPNU",
 					"afterText": "%",
-					"maxLength": 3
+					"maxLength": 3,
+					"maxRange":100,
+					"minRange":0
 				}, {
 					"optionName": "Other",
 					"type": "num",
@@ -189,7 +207,9 @@
 					"selectedText": "",
 					"selectedId": "CID_OTHER_INPNU",
 					"afterText": "%",
-					"maxLength": 3
+					"maxLength": 3,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}, {
 				"questionHeading": "Annual outbound calls",
@@ -202,7 +222,9 @@
 					"selectedText": "",
 					"selectedId": "CID_OC_INPNU",
 					"afterText": "#",
-					"maxLength": 5
+					"maxLength": 5,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}, {
 				"questionHeading": "Outbound - sales",
@@ -215,7 +237,9 @@
 					"selectedText": "",
 					"selectedId": "CID_TELESALES_INPNU",
 					"afterText": "#",
-					"maxLength": 5
+					"maxLength": 5,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}, {
 				"questionHeading": "Outbound - collection",
@@ -228,7 +252,9 @@
 					"selectedText": "",
 					"selectedId": "CID_COLLECTIONS_INPNU",
 					"afterText": "#",
-					"maxLength": 5
+					"maxLength": 5,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}, {
 				"questionHeading": "Outbound - retention",
@@ -241,7 +267,9 @@
 					"selectedText": "",
 					"selectedId": "CID_RETENTIONS_INPNU",
 					"afterText": "#",
-					"maxLength": 5
+					"maxLength": 5,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}, {
 				"questionHeading": "Outbound - marketing &amp; others",
@@ -254,7 +282,9 @@
 					"selectedText": "",
 					"selectedId": "CID_MO_INPNU",
 					"afterText": "#",
-					"maxLength": 5
+					"maxLength": 5,
+					"maxRange":100,
+					"minRange":0
 				}]
 			}]
 		}],
@@ -310,6 +340,7 @@
 	"rightData": [{
 		"readdOnly": false,
 		"catType": 1,
+		"scrollPosition":200,
 		"heading": "Organizational details",
 		"subheading": "Footprint",
 		"categoryHeading": "Footprint by geo, economy, service type and size",
@@ -341,11 +372,13 @@
 			}]
 		}, {
 			"optionName": "City",
-			"type": "txt",
+			"type": "num",
 			"placeholder": "Enter the value",
 			"description": "City of delivery footprint",
 			"selectedText": "",		
-			"selectedId": "FP_City_TXT"
+			"selectedId": "FP_City_TXT",
+			"maxLength":10,
+			"maxRange":100
 		}, {
 			"optionName": "Economic status",
 			"type": "dd",
@@ -662,6 +695,7 @@
 <!-- <input class="el4 left-panel-subMenu-slctn" id="left-panel-subMenu-slctn"  name="currentSubTab" /> -->
 <input class="el5 ttl-attmpt" id="ttl-attmpt"  name="currentSubTab" />
 <input class="el6 cur-prcntge" id="cur-prcntge"  name="currentSubTab" />
+<input type="text" class="el7 scroll-value" id="scroll-value" />
 
 <!-- <div style="display:none;" class="navigationarea"></div> -->
 <input type="hidden" id="forwardbutton" name="__fwd" tabindex="9998" class="navbutton confirmit-nav" onclick=" if(typeof wix=='object') {wix.nav(event, 'p1862356818');} " value="  >>  ">
@@ -714,7 +748,7 @@
 	<input type="text" id="FP_REV_INPNU">
 	
 	<br/>
-	<input type="text" class="scroll-value" id="scroll-value" />
+	
 
 </br>
 
@@ -763,6 +797,12 @@
         position:fixed;
         top:5px;
         left:500px;
+        z-index:9999;
+    }
+    .el7{
+        position:fixed;
+        top:5px;
+        left:600px;
         z-index:9999;
     }
 </style>
