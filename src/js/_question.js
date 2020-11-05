@@ -146,6 +146,8 @@ Vue.component("right-panel", {
     },
 
     handleInput: function (question, catType, quesIndex, optionIndex, e) {
+      // debugger;
+
       let { type, maxLength, selectedId } = question;
       let val, valArr;
 
@@ -170,10 +172,7 @@ Vue.component("right-panel", {
         }
       }
 
-      this.updateProgressData();
       val = valArr.join("");
-      document.getElementById(selectedId).value = val;
-      e.target.value = val;
 
       if (catType == 1) {
         this.rightData.forEach((category) => {
@@ -191,6 +190,10 @@ Vue.component("right-panel", {
           }
         });
       }
+      this.updateProgressData();
+      e.target.value = val;
+
+      document.getElementById(selectedId).value = val;
     },
 
     updateProgressData: function () {
@@ -220,7 +223,7 @@ Vue.component("right-panel", {
                   totalAttempted++;
                 }
               }
-              if (option.type == "txt") {
+              if (option.type == "txt" || option.type == "num") {
                 if (option.selectedText !== "") {
                   totalAttempted++;
                 }
@@ -233,6 +236,7 @@ Vue.component("right-panel", {
       // this.progressData.percentge = parseInt(
       //   (totalAttempted / Number(this.progressData.totalQues)) * 100
       // );
+
       this.$parent.updateLeftQuestionAttempt(totalAttempted); //calling parent
       this.$parent.getTotalQuestions(); //calling parent
       this.$refs.prsPanel.updateProgresbar(totalAttempted); //calling child component
