@@ -375,6 +375,7 @@ Vue.component("progress-panel", {
   methods: {
 
     nextPage: function (forwardBtnVal) {
+      console.log("called");
       document.getElementById("left-panel-menu-slctn").value = forwardBtnVal;
       document.getElementById("forwardbutton").click();
     },
@@ -399,13 +400,14 @@ Vue.component("progress-panel", {
         this.submitStatus = false;
       }
     },
-  },
-  checkSubmitStatus: function (submitStatus) {
-    //v-on="this.submitStatus == false ? {} : {click:()=>nextPage(progressData.submitVal)}"
-    if (submitStatus != false) {
-      this.nextPage(this.progressData.submitVal);
-    }
-  },
+    checkSubmitStatus: function (submitStatus) {
+      //v-on="this.submitStatus == false ? {} : {click:()=>nextPage(progressData.submitVal)}"
+      if (submitStatus != false) {
+        this.nextPage(this.progressData.submitVal);
+      }
+    },
+  }
+
 });
 
 {

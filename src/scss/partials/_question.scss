@@ -47,6 +47,9 @@
         float: left;
         display: table;
         margin: 15px 0px;
+        @media (max-width:767px){
+          width:100%;
+        }
         .after-text {
           position: absolute;
           top: 10px;
@@ -56,6 +59,14 @@
           width: 50%;
           display: table-cell;
           vertical-align: middle;
+          position: relative;
+          & >span{
+              &:first-child{
+                padding-right: 27px;
+                display: inline-block;
+              }
+             
+          }
         }
         .input-box {
           width: 90%;
@@ -64,7 +75,10 @@
         }
         .tooltips {
           float: right;
-          margin-right: 10px;
+          margin-right: 10px;         
+            position: absolute;
+            right: 0;
+            top: 13px;          
         }
       }
     }
@@ -503,6 +517,12 @@
   background: $e1-clr;
   padding: 9px 15px;
   font-size: 15px;
+  @media (max-width:767px){   
+      width: 100%;
+      margin-bottom: 10px;
+      display: block;
+   
+  }
    @media (min-width:481px){
       margin-right: 10px;
    }

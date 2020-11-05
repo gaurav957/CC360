@@ -11,7 +11,7 @@ Vue.component("footer-panel", {
   },
   template: `<div class="footer clearfix">
   <div class="navigation-block clearfix">
-    <div class="right">
+    <div class="right question-footer">
       <span class="tt-ans"><span v-html="footerData.ttlCnt"></span> <span v-html="this.intialQuestions"></span>/<span v-html="this.totalQuestions"></span></span>
 		   <div class="btn-item pre" :class="prevEnable == true?'':'disable'" v-html=footerData.prevTxt @click="prevEnable == true?PrevPage():''" ></div>
 		   <div class="btn-item frw" :class="nextEnable == true?'':'disable'" v-html=footerData.forwardTxt @click="nextEnable == true?nextPage(footerData.forwardVal):''"></div>
