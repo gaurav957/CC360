@@ -17,14 +17,14 @@ Vue.component("right-panel", {
                   <span class="tooltips">
                       <div class="tooltip">
                         <span class="custom-infoicon"></span>
-                        <span class="tooltiptext" >dd</span>
+                        <span class="tooltiptext" v-html="question.description"></span>
                       </div>
                   </span>
                 </div>
                 <div class="input-box">
-                  <select class="cst-form-control">
+                  <select class="cst-form-control" @change="handleSelect(232,$event)">
                     <option disabled v-html="question.placeholder" selected></option>
-                    <option v-for="option of question.options" v-html="option.ddName" :id="option.ddId"></option>
+                    <option v-for="option of question.options" v-html="option.ddName" :value="option.ddId"></option>
                   </select>
                 </div>
               </div>
@@ -39,7 +39,8 @@ Vue.component("right-panel", {
                   </span>
                 </div>
                 <div class="input-box">
-                  <input type="text" class="cst-form-control" :placeholder="question.placeholder" :id="question.selectedId" />
+                <input :id="question.selectedId"/>
+                  <input type="text" class="cst-form-control" :placeholder="question.placeholder" @input="handleInput(question,catType,quesIndex,optionIndex ,$event)" />
                 </div>
               </div>
             </div>            
@@ -51,10 +52,10 @@ Vue.component("right-panel", {
           <h2 class="ques-heading" v-html='qType.heading'></h2>
           <div class="question-type2" >
             <h4 class="sub-heading" v-html='qType.subheading'></h4>           
-            <div class="question-row" v-for="question of qType.questions" :class="{'wide': question.quesLength>1 }">                          
+            <div class="question-row" v-for="(question,quesIndex) of qType.questions" :class="{'wide': question.quesLength>1 }">                          
 
             <div class="question-line" v-html='question.questionHeading'></div>
-              <div class="question-group" v-for="option of question.options">
+              <div class="question-group" v-for="(option,optionIndex) of question.options">
                 <div class="text-label"><span v-html='option.optionName'></span>
                   <span class="tooltips">
                       <div class="tooltip">
@@ -66,11 +67,11 @@ Vue.component("right-panel", {
                 <div class="input-box">
                   <input :id="option.selectedId" >
                   <input v-if="option.type=='num' || option.type=='txt'" type="text" :placeholder="option.placeholder"
-                  class="cst-form-control"  :value="option.selectedText" @input="handleInput(option.selectedId, 10, $event)">
+                  class="cst-form-control"  :value="option.selectedText"e @input="handleInput(option.selectdId, option.maxLength,option.type,quesIndex,optionIndex ,$event)">
 
-                  <select v-if="option.type=='dd' " class="cst-form-control">
+                  <select v-if="option.type=='dd' " class="cst-form-control" @change="handleSelect($event)">
                       <option disabled v-html="option.placeholder" selected></option>
-                      <option v-for="quesOption of option.options" v-html="quesOption.ddName" ></option>
+                      <option v-for="quesOption of option.options" v-html="quesOption.ddName" :value="quesOption.ddId" ></option>
                     </select>
                 </div>
               </div>
@@ -102,26 +103,33 @@ Vue.component("right-panel", {
       }
     },
 
-    handleInput: function (id, length, type, e) {
+    handleSelect: function (id, e) {
+      console.log(id, e.target.value);
+      document.getElementById(e.target.value).click();
+    },
+
+    handleInput: function (question, catType, quesIndex, optionIndex, e) {
+      let { type, maxLength, selectdId } = question;
       let val = e.target.value.trim();
       let valArr = val.split("");
-      console.log(val, id, length);
 
-      // if (type == "num") {
-      //   if (isNaN(val)) {
-      //     val = valArr.filter((ch) => !isNaN(ch)).join("");
-      //   }
-      //   console.log(val);
-      //   const elem = document.getElementById(id);
-      //   if (val.split("").length <= length) {
-      //     elem.value = val;
-      //   } else {
-      //     valArr.pop();
-      //     elem.value = val;
-      //     e.target.value = val;
-      //   }
-      // } else {
-      // }
+      if (type == "num") {
+        if (isNaN(val)) {
+          valArr = valArr.filter((ch) => !isNaN(ch));
+        }
+      }
+
+      if (valArr.length > maxLength) {
+        valArr.pop();
+      }
+      val = valArr.join("");
+      document.getElementById(selectdId).value = val;
+      e.target.value = val;
+      this.rightData.forEach((data) => {
+        if (data.catType == catType) {
+          data.questions[quesIndex].options[optionIndex].selectedText = val;
+        }
+      });
     },
 
     handleKeyDown: function (catIn, subCatIn, quesInd, ques_id, e) {
