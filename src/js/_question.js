@@ -147,7 +147,7 @@ Vue.component("right-panel", {
 
     handleInput: function (question, catType, quesIndex, optionIndex, e) {
       // debugger;
-
+      console.log(question.maxRange, question.minRange);
       let { type, maxLength, selectedId } = question;
       let val, valArr;
 
@@ -163,6 +163,10 @@ Vue.component("right-panel", {
         val = e.target.value;
         valArr = val.split("");
         valArr = valArr.filter((ch) => /^[a-zA-Z\s]*$/.test(ch));
+      }
+
+      if (Number(valArr.join("")) > question.maxRange) {
+        valArr.pop();
       }
       if (valArr.length > maxLength) {
         if (valArr[valArr.length - 1] == " ") {
