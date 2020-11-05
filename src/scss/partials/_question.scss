@@ -68,6 +68,18 @@
         }
       }
     }
+    @media (max-width: 768px) {
+      .question-row {
+        width: 100%;
+      }
+      .wide {
+        width: 100%;
+
+        .question-group {
+          width: 100%;
+        }
+      }
+    }
   }
   .question-type2 {
     padding: 20px 10px;
@@ -103,6 +115,12 @@
           width: 90%;
           display: table-cell;
           float: left;
+          position: relative;
+          .after-text {
+            position: absolute;
+            top: 10px;
+            right: -15px;
+          }
         }
         .tooltips {
           float: right;
@@ -110,12 +128,23 @@
         }
       }
     }
-
     .wide {
       width: 100%;
 
       .question-group {
         width: 50%;
+      }
+    }
+    @media (max-width: 768px) {
+      .question-row {
+        width: 100%;
+      }
+      .wide {
+        width: 100%;
+
+        .question-group {
+          width: 100%;
+        }
       }
     }
   }
