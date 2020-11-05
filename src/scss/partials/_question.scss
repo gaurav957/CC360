@@ -310,7 +310,8 @@
   //  height: calc(100vh - 300px);
   .scrollable {
     padding-right: 25px;
-    height: calc(100vh - 340px);
+    // height: calc(100vh - 340px);
+    height: calc(100vh - 285px);
     overflow-y: auto;
   }
 }
