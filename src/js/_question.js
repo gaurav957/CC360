@@ -286,7 +286,7 @@ Vue.component("progress-panel", {
             </div>
             <div class='btn-outer'>
                     <div class='btn-item save' v-html='progressData.saveTxt' @click=savePage>Save</div>
-                    <div class='btn-item submit' :class="this.submitStatus == false?'disable':''" v-on="this.submitStatus == false ? {} : {click:()=>nextPage(progressData.submitVal)}" v-html='progressData.submitTxt' >Submit</div>
+                    <div class='btn-item submit' :class="this.submitStatus == false?'disable':''" @click=checkSubmitStatus(this.submitStatus) v-html='progressData.submitTxt' >Submit</div>
             </div>
         </div>
     
@@ -299,7 +299,6 @@ Vue.component("progress-panel", {
   methods: {
     nextPage: function (forwardBtnVal) {
       document.getElementById("left-panel-menu-slctn").value = forwardBtnVal;
-      document.getElementById("left-panel-subMenu-slctn").value = forwardBtnVal;
       document.getElementById("forwardbutton").click();
     },
     savePage: function () {
@@ -323,4 +322,10 @@ Vue.component("progress-panel", {
       }
     },
   },
+  checkSubmitStatus:function(submitStatus){
+    //v-on="this.submitStatus == false ? {} : {click:()=>nextPage(progressData.submitVal)}"
+    if(submitStatus != false){
+      this.nextPage(this.progressData.submitVal)
+    }
+  }
 });

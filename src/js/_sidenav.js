@@ -189,6 +189,9 @@ Vue.component("left-panel", {
             totalAnswered += Number(link.initialQAnsd);
         }
 
+        console.log(totalAnswered)
+        console.log(totalQuestions)
+
         this.$parent.setTotalQuestions(totalAnswered,totalQuestions);//calling parent
 
       }
