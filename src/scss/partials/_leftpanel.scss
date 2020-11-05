@@ -29,9 +29,11 @@
       position: relative;
       .nav-item{
         padding:15px;
-        span &:first-child{
-          padding-right: 50px;
-          display: block;
+        span:first-child{
+          // padding-right: 50px;
+          // display: block;
+          display: inline-block;
+          width: calc(100% - 35px);
         }
         .rt-prgs {
           float: right;

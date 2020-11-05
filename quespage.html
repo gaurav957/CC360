@@ -22,7 +22,7 @@
 </div>
  <!--Main wrapper end-->
  	
-<span id="jsonData" style="display: none">
+<!-- <span id="jsonData" style="display: none">
 	{
 		"headerData": {
 			"logo": "https://e2eresearch.com/swteam/McKinsey/CC360_KPI_Project/mck-logo.svg",
@@ -305,14 +305,15 @@
 			"forwardTxt": "Forward",
 			"forwardVal": "CS_ASOCC_INPNU",
 			"footerLogo": "https://e2eresearch.com/swteam/McKinsey/CC360_KPI_Project/mck-logo-footer.png",
-			"copyrghtTxt": "© 1996-2019 McKinsey &amp; Company"
+			"copyrghtTxt": "© 1996-2019 McKinsey &amp; Company",
+			"ttlCnt": "Total Answered:"
 		}
 	}
     
-    </span> 
+    </span>  -->
     
     
-    <!-- <span id="jsonData" style="display: none">
+    <span id="jsonData" style="display: none">
         {
 	"headerData": {
 		"logo": "https://e2eresearch.com/swteam/McKinsey/CC360_KPI_Project/mck-logo.svg",
@@ -339,6 +340,7 @@
 	"rightData": [{
 		"readdOnly": false,
 		"catType": 1,
+		"scrollPosition":200,
 		"heading": "Organizational details",
 		"subheading": "Footprint",
 		"categoryHeading": "Footprint by geo, economy, service type and size",
@@ -370,11 +372,13 @@
 			}]
 		}, {
 			"optionName": "City",
-			"type": "txt",
+			"type": "num",
 			"placeholder": "Enter the value",
 			"description": "City of delivery footprint",
 			"selectedText": "",		
-			"selectedId": "FP_City_TXT"
+			"selectedId": "FP_City_TXT",
+			"maxLength":10,
+			"maxRange":100
 		}, {
 			"optionName": "Economic status",
 			"type": "dd",
@@ -472,6 +476,188 @@
 			"afterText": "$",
 			"maxLength": 9
 		}]
+	},
+	{
+		"readdOnly": false,
+		"catType": 2,
+		"heading": "Call details",
+		"subheading": "Calls/interaction details",
+		"questions": [{
+			"questionHeading": "Annual inbound calls",
+			"quesLength": 1,
+			"options": [{
+				"optionName": "Inbound - calls - agent handled only",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Total number of inbound calls handled calls by agents from in-house as well as outsourced sites",
+				"selectedText": "",
+				"selectedId": "CID_ICALLS_INPNU",
+				"afterText": "#",
+				"maxLength": 5
+			}]
+		}, {
+			"questionHeading": "Annual inbound emails",
+			"quesLength": 1,
+			"options": [{
+				"optionName": "Inbound - emails - agent handled only",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Total number of inbound emails handled by agents from in-house and outsourced sites",
+				"selectedText": "",
+				"selectedId": "CID_IEMAILS_INPNU",
+				"afterText": "#",
+				"maxLength": 5
+			}]
+		}, {
+			"questionHeading": "Annual inbound chats",
+			"quesLength": 1,
+			"options": [{
+				"optionName": "Inbound - chat - agent handled only",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Total number of inbound chat handled by agents from in-house and outsourced sites",
+				"selectedText": "",
+				"selectedId": "CID_ICHAT_INPNU",
+				"afterText": "#",
+				"maxLength": 5
+			}]
+		}, {
+			"questionHeading": "Outsourcing leverage for inbound calls",
+			"quesLength": 1,
+			"options": [{
+				"optionName": "Inbound calls outsourced",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Total annual inbound calls outsourced to onshore, nearshore and offshore vendors",
+				"selectedText": "",
+				"selectedId": "CID_ICALLSO_INPNU",
+				"afterText": "#",
+				"maxLength": 5
+			}]
+		}, {
+			"questionHeading": "Inbound call volume mix (agent handled) - please provide site wise",
+			"quesLength": 6,
+			"options": [{
+				"optionName": "Customer service (billing and inquiries)",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Please describe how your inbound call volume is distributed by call type (% of calls) - agent handled calls only",
+				"selectedText": "",
+				"selectedId": "CID_CS_INPNU",
+				"afterText": "%",
+				"maxLength": 3
+			}, {
+				"optionName": "Complaint handling",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Please describe how your inbound call volume is distributed by call type (% of calls) - agent handled calls only",
+				"selectedText": "",
+				"selectedId": "CID_CH_INPNU",
+				"afterText": "%",
+				"maxLength": 3
+			}, {
+				"optionName": "Technical helpdesk",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Please describe how your inbound call volume is distributed by call type (% of calls) - agent handled calls only",
+				"selectedText": "",
+				"selectedId": "CID_TH_INPNU",
+				"afterText": "%",
+				"maxLength": 3
+			}, {
+				"optionName": "Transaction or processing involved ",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Please describe how your inbound call volume is distributed by call type (% of calls) - agent handled calls only",
+				"selectedText": "",
+				"selectedId": "CID_TPI_INPNU",
+				"afterText": "%",
+				"maxLength": 3
+			}, {
+				"optionName": "Response to direct marketing ",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Please describe how your inbound call volume is distributed by call type (% of calls) - agent handled calls only",
+				"selectedText": "",
+				"selectedId": "CID_RDM_INPNU",
+				"afterText": "%",
+				"maxLength": 3
+			}, {
+				"optionName": "Other",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Please describe how your inbound call volume is distributed by call type (% of calls) - agent handled calls only",
+				"selectedText": "",
+				"selectedId": "CID_OTHER_INPNU",
+				"afterText": "%",
+				"maxLength": 3
+			}]
+		}, {
+			"questionHeading": "Annual outbound calls",
+			"quesLength": 1,
+			"options": [{
+				"optionName": "Outbound calls",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Call center (in-house + outsourced)-provide site wise numbers for outbound (excludes follow-up calls in relation to inbound call)",
+				"selectedText": "",
+				"selectedId": "CID_OC_INPNU",
+				"afterText": "#",
+				"maxLength": 5
+			}]
+		}, {
+			"questionHeading": "Outbound - sales",
+			"quesLength": 1,
+			"options": [{
+				"optionName": "Telesales",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Total outbound calls made for Telesales",
+				"selectedText": "",
+				"selectedId": "CID_TELESALES_INPNU",
+				"afterText": "#",
+				"maxLength": 5
+			}]
+		}, {
+			"questionHeading": "Outbound - collection",
+			"quesLength": 1,
+			"options": [{
+				"optionName": "Collections",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Total outbound calls made for collections",
+				"selectedText": "",
+				"selectedId": "CID_COLLECTIONS_INPNU",
+				"afterText": "#",
+				"maxLength": 5
+			}]
+		}, {
+			"questionHeading": "Outbound - retention",
+			"quesLength": 1,
+			"options": [{
+				"optionName": "Retentions",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Total outbound calls made for customer retention",
+				"selectedText": "",
+				"selectedId": "CID_RETENTIONS_INPNU",
+				"afterText": "#",
+				"maxLength": 5
+			}]
+		}, {
+			"questionHeading": "Outbound - marketing &amp; others",
+			"quesLength": 1,
+			"options": [{
+				"optionName": "Marketing &amp; others",
+				"type": "num",
+				"placeholder": "Enter the value",
+				"description": "Total outbound calls made for marketing or surveys etc.",
+				"selectedText": "",
+				"selectedId": "CID_MO_INPNU",
+				"afterText": "#",
+				"maxLength": 5
+			}]
+		}]
 	}],
 	"progressData": {
 		"answerTxt": "Answered",
@@ -490,10 +676,11 @@
 		"forwardTxt": "Forward",
 		"forwardVal": "CID_ICALLS_INPNU",
 		"footerLogo": "https://e2eresearch.com/swteam/McKinsey/CC360_KPI_Project/mck-logo-footer.png",
-		"copyrghtTxt": "© 1996-2019 McKinsey & Company"
+		"copyrghtTxt": "© 1996-2019 McKinsey & Company",
+		"ttlCnt": "Total Answered:"
 	}
 }
-    </span> -->
+    </span>
 
 
 
@@ -508,6 +695,7 @@
 <!-- <input class="el4 left-panel-subMenu-slctn" id="left-panel-subMenu-slctn"  name="currentSubTab" /> -->
 <input class="el5 ttl-attmpt" id="ttl-attmpt"  name="currentSubTab" />
 <input class="el6 cur-prcntge" id="cur-prcntge"  name="currentSubTab" />
+<input type="text" class="el7 scroll-value" id="scroll-value" />
 
 <!-- <div style="display:none;" class="navigationarea"></div> -->
 <input type="hidden" id="forwardbutton" name="__fwd" tabindex="9998" class="navbutton confirmit-nav" onclick=" if(typeof wix=='object') {wix.nav(event, 'p1862356818');} " value="  >>  ">
@@ -560,7 +748,7 @@
 	<input type="text" id="FP_REV_INPNU">
 	
 	<br/>
-	<input type="text" class="scroll-value" id="scroll-value" />
+	
 
 </br>
 
@@ -609,6 +797,12 @@
         position:fixed;
         top:5px;
         left:500px;
+        z-index:9999;
+    }
+    .el7{
+        position:fixed;
+        top:5px;
+        left:600px;
         z-index:9999;
     }
 </style>
