@@ -22,7 +22,7 @@ Vue.component("right-panel", {
                   </span>
                 </div>
                 <div class="input-box">
-             
+                <input v-for="option of question.options" type="radio" :name="qType+'_'+quesIndex" :id="option.ddId" />
                   <select class="cst-form-control" @change="handleSelect(qType.catType, quesIndex, null, $event)">
                     <option disabled v-html="question.placeholder" selected></option>
                     <option v-for="option of question.options" v-html="option.ddName" :value="option.ddId">                   
@@ -87,6 +87,7 @@ Vue.component("right-panel", {
       </div>
     </div>
   </div>
+
 </div>
   `,
   mounted: function () {
@@ -108,7 +109,6 @@ Vue.component("right-panel", {
     },
 
     handleSelect: function (catType, quesIndex, optionIndex, e) {
-      console.log(e.target.value, catType, quesIndex, optionIndex);
       if (catType == 1) {
         this.rightData.forEach((category) => {
           if (category.catType == 1) {
@@ -124,8 +124,8 @@ Vue.component("right-panel", {
           }
         });
       }
+      this.updateProgressData();
       document.getElementById(e.target.value).click();
-      console.log(this.rightData);
     },
 
     handleInput: function (question, catType, quesIndex, optionIndex, e) {
@@ -144,7 +144,6 @@ Vue.component("right-panel", {
         val = e.target.value;
         valArr = val.split("");
         valArr = valArr.filter((ch) => /^[a-zA-Z\s]*$/.test(ch));
-        console.log(valArr);
       }
       if (valArr.length > maxLength) {
         if (valArr[valArr.length - 1] == " ") {
@@ -153,10 +152,6 @@ Vue.component("right-panel", {
           valArr.pop();
         }
       }
-
-      val = valArr.join("");
-      document.getElementById(selectedId).value = val;
-      e.target.value = val;
 
       if (catType == 1) {
         this.rightData.forEach((category) => {
@@ -174,8 +169,51 @@ Vue.component("right-panel", {
           }
         });
       }
-
       console.log(this.rightData);
+      this.updateProgressData();
+      val = valArr.join("");
+      document.getElementById(selectedId).value = val;
+      e.target.value = val;
+    },
+
+    updateProgressData: function () {
+      let totalAttempted = 0;
+
+      this.rightData.forEach((data) => {
+        if (data.catType == 1) {
+          data.questions.forEach((question) => {
+            if (question.type == "dd") {
+              if (question.selectedId !== "") {
+                totalAttempted++;
+              }
+            }
+            if (question.type == "txt" || question.type == "num") {
+              if (question.selectedText !== "") {
+                totalAttempted++;
+              }
+            }
+          });
+        }
+
+        if (data.catType == 2) {
+          data.questions.forEach((question) => {
+            question.options.forEach((option) => {
+              if (option.type == "dd") {
+                if (option.selectedId !== "") {
+                  totalAttempted++;
+                }
+              }
+              if (option.type == "txt") {
+                if (option.selectedText !== "") {
+                  totalAttempted++;
+                }
+              }
+            });
+          });
+        }
+      });
+      this.progressData.answrdQues = totalAttempted;
+      console.log(this.progressData);
     },
 
     handleKeyDown: function (catIn, subCatIn, quesInd, ques_id, e) {
