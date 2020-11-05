@@ -58,12 +58,15 @@ var eventInputvueObj = new Vue({
     updateRightHeight: function () {
       this.$refs.rightPanel.setHeight();
     },
-    setTotalQuestions:function(totalAnswered,totalQuestions){
-      this.$refs.footerPanel.setAllQuestions(totalAnswered,totalQuestions);
+    setTotalQuestions: function (totalAnswered, totalQuestions) {
+      this.$refs.footerPanel.setAllQuestions(totalAnswered, totalQuestions);
     },
-    setScrollHeight:function(){
+    setScrollHeight: function () {
       this.$refs.rightPanel.setScrollHeight();
-    }
+    },
+    getTotalQuestions: function () {
+      this.$refs.leftPanel.updatteAllQuestions();
+    },
   },
 
   created: function () {

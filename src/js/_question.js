@@ -22,7 +22,7 @@ Vue.component("right-panel", {
                   </span>
                 </div>
                 <div class="input-box">
-                <input v-for="option of question.options" type="radio" :name="qType+'_'+quesIndex" :id="option.ddId" />
+                
                   <select class="cst-form-control" @change="handleSelect(qType.catType, quesIndex, null, $event)">
                     <option disabled v-html="question.placeholder" selected></option>
                     <option v-for="option of question.options" v-html="option.ddName" :value="option.ddId">                   
@@ -212,7 +212,13 @@ Vue.component("right-panel", {
           });
         }
       });
-      this.progressData.answrdQues = totalAttempted;
+      // this.progressData.answrdQues = totalAttempted;
+      // this.progressData.percentge = parseInt(
+      //   (totalAttempted / Number(this.progressData.totalQues)) * 100
+      // );
+      this.$parent.updateLeftQuestionAttempt(totalAttempted); //calling parent
+      this.$parent.getTotalQuestions(); //calling parent
+      this.$refs.prsPanel.updateProgresbar(totalAttempted); //calling child component
       console.log(this.progressData);
     },
 
@@ -360,10 +366,14 @@ Vue.component("progress-panel", {
       }
     },
   },
-  checkSubmitStatus:function(submitStatus){
+  checkSubmitStatus: function (submitStatus) {
     //v-on="this.submitStatus == false ? {} : {click:()=>nextPage(progressData.submitVal)}"
-    if(submitStatus != false){
-      this.nextPage(this.progressData.submitVal)
+    if (submitStatus != false) {
+      this.nextPage(this.progressData.submitVal);
     }
-  }
+  },
 });
+
+{
+  /* <input v-for="option of question.options" type="radio" :name="qType+'_'+quesIndex" :id="option.ddId" /> */
+}
