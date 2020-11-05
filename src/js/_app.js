@@ -55,9 +55,9 @@ var eventInputvueObj = new Vue({
     updatePrgsSubmit: function (endis) {
       this.$refs.rightPanel.enabDisSubmit(endis);
     },
-    updateRightHeight: function () {
-      this.$refs.rightPanel.setHeight();
-    },
+    // updateRightHeight: function () {
+    //   this.$refs.rightPanel.setHeight();
+    // },
     setTotalQuestions: function (totalAnswered, totalQuestions) {
       this.$refs.footerPanel.setAllQuestions(totalAnswered, totalQuestions);
     },
