@@ -58,32 +58,22 @@ var eventInputvueObj = new Vue({
     updateRightHeight: function () {
       this.$refs.rightPanel.setHeight();
     },
+    setTotalQuestions:function(totalAnswered,totalQuestions){
+      this.$refs.footerPanel.setAllQuestions(totalAnswered,totalQuestions);
+    },
+    setScrollHeight:function(){
+      this.$refs.rightPanel.setScrollHeight();
+    }
   },
 
   created: function () {
-    //let a = JSON.parse(document.getElementById("jsonData").innerHTML);
-    //console.log(a.headerData);
-    //console.log(JSON.parse(document.getElementById("jsonData").innerHTML))
     if (document.getElementById("jsonData")) {
       this.alldata = JSON.parse(document.getElementById("jsonData").innerText);
-      // this.alldata2 = JSON.parse(
-      //   document.getElementById("jsonData2").innerText
-      // );
       this.headerdata = this.alldata.headerData;
       this.leftdata = this.alldata.leftData;
-      // this.rightdata = this.alldata.rightData;
-      // this.progressdata = this.alldata.progressData;
       this.rightdata = this.alldata.rightData;
       this.progressdata = this.alldata.progressData;
       this.footerdata = this.alldata.footerData;
     }
-
-    //console.log(this.alldata)
-    console.log(this.alldata);
-
-    //alert(JSON.stringify(this.alldata));
-    //alert(JSON.stringify(this.leftdata));
-    //alert(JSON.stringify(this.rightdata));
-    //alert(JSON.stringify(this.footerdata))
   },
 });

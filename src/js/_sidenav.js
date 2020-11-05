@@ -21,37 +21,27 @@ Vue.component("left-panel", {
     `,
 
     mounted:function(){
-      // for(let link of this.LeftData.links){
-      //   if(this.LeftData.seltdParentVal == link.menuVal && link.sublinks.length>0){
-      //     var el = document.querySelector("[data-menuVal='"+link.menuVal+"']").nextElementSibling;
-      //     el.classList.add('open');
-      //   }
-      // }
 
-      // document.getElementById("left-panel-menu-slctn").value = this.LeftData.seltdParentVal;      
-      // document.getElementById("left-panel-subMenu-slctn").value = this.LeftData.seltdChildVal;
+      document.getElementById("left-panel-menu-slctn").value = this.LeftData.seltdVal;      
 
-      // let linksLen = this.LeftData.links.length;
+      let linksLen = this.LeftData.links.length;
+
+      if(this.LeftData.links[0].menuVal == this.LeftData.seltdVal ){
+        this.$parent.disPrevParent();//calling parent
+      }
+      if(this.LeftData.links[linksLen-1].menuVal == this.LeftData.seltdVal ){
+        this.$parent.disNextParent();//calling parent
+      }
+
+      this.checkSubmitBtn();
+      this.updatteAllQuestions();
+
+      document.addEventListener("DOMContentLoaded", function() {
+        //The first argument are the elements to which the plugin shall be initialized
+        //The second argument has to be at least a empty object or a object with your desired options
+        OverlayScrollbars(document.querySelector('.side-nav-scroll'), { });
+      });
       
-      // if(this.LeftData.links[0].sublinks.length == 0 && this.LeftData.seltdParentVal ==this.LeftData.links[0].menuVal ){
-        
-      //   this.$parent.disPrevParent();//calling parent
-      // }
-      // else if(this.LeftData.links[0].sublinks.length != 0 && this.LeftData.seltdParentVal ==this.LeftData.links[0].menuVal && this.LeftData.seltdChildVal ==this.LeftData.links[0].sublinks[0].sublinkVal ){
-        
-      //   this.$parent.disPrevParent();//calling parent
-      // }else if(this.LeftData.links[linksLen-1].sublinks.length == 0 && this.LeftData.seltdParentVal ==this.LeftData.links[linksLen-1].menuVal){
-        
-      //   this.$parent.disNextParent();//calling parent
-      // }else if(this.LeftData.links[linksLen-1].sublinks.length != 0 && this.LeftData.seltdParentVal ==this.LeftData.links[linksLen-1].menuVal){
-        
-      //   let subLinkLen = this.LeftData.links[linksLen-1].sublinks.length;
-      //   if(this.LeftData.seltdChildVal ==this.LeftData.links[linksLen-1].sublinks[subLinkLen-1].sublinkVal){
-      //     this.$parent.disNextParent();//calling parent
-      //   }
-      // }
-
-      // this.checkSubmitBtn();
       
     },
     methods: {
@@ -62,45 +52,31 @@ Vue.component("left-panel", {
         document.getElementById("forwardbutton").click();
       },
       openBelow: function(index,e){
-        var node = e.target;
+        // var node = e.target;
         
-        if(node.className.indexOf('nav-item') < 0){
-          while ((node = node.parentNode) && node.className.indexOf('nav-item') < 0); 
-        }
+        // if(node.className.indexOf('nav-item') < 0){
+        //   while ((node = node.parentNode) && node.className.indexOf('nav-item') < 0); 
+        // }
 
-        if(node.classList.contains('open')){
-          node.classList.remove("open");
-        }else{
-          node.classList.add("open");
-        }
-        var id = 'menu_'+index;
-        var el = document.getElementById(id).nextElementSibling;
-        if(el.classList.contains('open')){
-          el.classList.remove("open");
-        }else{
-          el.classList.add("open");
-        }
+        // if(node.classList.contains('open')){
+        //   node.classList.remove("open");
+        // }else{
+        //   node.classList.add("open");
+        // }
+        // var id = 'menu_'+index;
+        // var el = document.getElementById(id).nextElementSibling;
+        // if(el.classList.contains('open')){
+        //   el.classList.remove("open");
+        // }else{
+        //   el.classList.add("open");
+        // }
        
       },
       updateQuesAttempt:function(ttlAttempt){
         
         for(let link of this.LeftData.links){
-          if(this.LeftData.seltdParentVal == link.menuVal){
-            if(link.sublinks.length){
-              for(let sublink of link.sublinks){
-                if(sublink.sublinkVal == this.LeftData.seltdChildVal){
-                  sublink.initialSubQAnsd = ttlAttempt
-                }
-              }
-
-              let parentAttemp = 0
-              for(let sublink of link.sublinks){
-                parentAttemp += Number(sublink.initialSubQAnsd);
-              }
-              link.initialQAnsd =parentAttemp; 
-            }else{
-              link.initialQAnsd =ttlAttempt;
-            }
+          if(this.LeftData.seltdVal == link.menuVal){
+            link.initialQAnsd = ttlAttempt;
           }
         }
 
@@ -108,29 +84,30 @@ Vue.component("left-panel", {
       },
       checkSubmitBtn:function(){
 
+        if (!Object.entries) {
+           Object.entries = function( obj ){
+             var ownProps = Object.keys( obj ),
+                 i = ownProps.length,
+                 resArray = new Array(i); // preallocate the Array
+             while (i--)
+               resArray[i] = [ownProps[i], obj[ownProps[i]]];
+             
+             return resArray;
+           };
+         }
+
+
         const mandQuesVal = this.LeftData.mandatoryQuesVal;
 
         let ttlManAttempt = 0;
         let ttlManQues = 0;
 
-        for(let [linkIndex,link] of this.LeftData.links.entries()){
-            if(link.sublinks.length != 0){
-
-              for(let [subLinkIndex,sublink] of this.LeftData.links[linkIndex].sublinks.entries()){
-
-                if(mandQuesVal.indexOf(sublink.sublinkVal) != -1){
-                  ttlManAttempt += Number(sublink.initialSubQAnsd);
-                  ttlManQues += Number(sublink.totalSubQues);
-                }
-
-              }
-
-            }else{
-              if(mandQuesVal.indexOf(link.menuVal) != -1){
-                ttlManAttempt += Number(link.initialQAnsd);
-                ttlManQues += Number(link.totalQues);
-              }
-            }
+        for(let [linkIndex,link] of Object.entries(this.LeftData.links)){
+          linkIndex = Number(linkIndex);
+          if(mandQuesVal.indexOf(link.menuVal) != -1){
+            ttlManAttempt += Number(link.initialQAnsd);
+            ttlManQues += Number(link.totalQues);
+          }
         }
 
         if(ttlManAttempt == ttlManQues){
@@ -141,103 +118,79 @@ Vue.component("left-panel", {
 
       },
       PrevbtnClick:function(){
-        for(let [linkIndex,link] of this.LeftData.links.entries()){
-         
-          if(this.LeftData.seltdParentVal == link.menuVal){
-             if(link.sublinks.length){
-              for(let [subIndex,sublink] of link.sublinks.entries()){
-                if(sublink.sublinkVal == this.LeftData.seltdChildVal){
 
-                  if(subIndex == 0){
+        if (!Object.entries) {
+          Object.entries = function( obj ){
+            var ownProps = Object.keys( obj ),
+                i = ownProps.length,
+                resArray = new Array(i); // preallocate the Array
+            while (i--)
+              resArray[i] = [ownProps[i], obj[ownProps[i]]];
+            
+            return resArray;
+          };
+        }
+        
 
-                   if(this.LeftData.links[linkIndex-1].sublinks.length == 0){
-                     
-                      
-                      document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex-1].menuVal;
-                      document.getElementById("left-panel-subMenu-slctn").value = '';
-                   }else{
-                    
-                     let sublinkLen = this.LeftData.links[linkIndex-1].sublinks.length;
-                    
-                     document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex-1].menuVal;
-                      document.getElementById("left-panel-subMenu-slctn").value = this.LeftData.links[linkIndex-1].sublinks[sublinkLen-1].sublinkVal;
-                   }
+        for(let [linkIndex,link] of Object.entries(this.LeftData.links)){
+          linkIndex = Number(linkIndex);
 
-                  }else{
-                    
-                    
-                    document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex].menuVal;
-                      document.getElementById("left-panel-subMenu-slctn").value = this.LeftData.links[linkIndex].sublinks[subIndex-1].sublinkVal;
-                  }
-                    
-                }
-              }
-            }else{
-              if(this.LeftData.links[linkIndex-1].sublinks.length == 0){
-                
-                document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex-1].menuVal;
-                document.getElementById("left-panel-subMenu-slctn").value = '';
-             }else{
-              
-                let sublinkLen = this.LeftData.links[linkIndex-1].sublinks.length;
-                document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex-1].menuVal;
-                document.getElementById("left-panel-subMenu-slctn").value = this.LeftData.links[linkIndex-1].sublinks[sublinkLen-1].sublinkVal;
-             }
-            }
+          if(this.LeftData.seltdVal == link.menuVal){
+            document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex-1].menuVal;
           }
         }
-        //alert(document.getElementById("left-panel-menu-slctn").value);
-        //alert(document.getElementById("left-panel-subMenu-slctn").value);
         document.getElementById("forwardbutton").click();
       },
       NextbtnClick:function(){
-        for(let [linkIndex,link] of this.LeftData.links.entries()){
-         
-          if(this.LeftData.seltdParentVal == link.menuVal){
-             if(link.sublinks.length){
-              for(let [subIndex,sublink] of link.sublinks.entries()){
-                if(sublink.sublinkVal == this.LeftData.seltdChildVal){
 
-                  if(subIndex == link.sublinks.length-1){
+        if (!Object.entries) {
+          Object.entries = function( obj ){
+            var ownProps = Object.keys( obj ),
+                i = ownProps.length,
+                resArray = new Array(i); // preallocate the Array
+            while (i--)
+              resArray[i] = [ownProps[i], obj[ownProps[i]]];
+            
+            return resArray;
+          };
+        }
 
-                   if(this.LeftData.links[linkIndex+1].sublinks.length == 0){
-                     
-                      
-                      document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex+1].menuVal;
-                      document.getElementById("left-panel-subMenu-slctn").value = '';
-                   }else{
-                    
 
-                    
-                     document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex+1].menuVal;
-                      document.getElementById("left-panel-subMenu-slctn").value = this.LeftData.links[linkIndex+1].sublinks[0].sublinkVal;
-                   }
+        for(let [linkIndex,link] of Object.entries(this.LeftData.links)){
+          linkIndex = Number(linkIndex);
 
-                  }else{
-                    
-                    
-                    document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex].menuVal;
-                      document.getElementById("left-panel-subMenu-slctn").value = this.LeftData.links[linkIndex].sublinks[subIndex+1].sublinkVal;
-                  }
-                    
-                }
-              }
-            }else{
-              if(this.LeftData.links[linkIndex+1].sublinks.length == 0){
-                
-                document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex+1].menuVal;
-                document.getElementById("left-panel-subMenu-slctn").value = '';
-             }else{
-              
-                document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex+1].menuVal;
-                document.getElementById("left-panel-subMenu-slctn").value = this.LeftData.links[linkIndex+1].sublinks[0].sublinkVal;
-             }
-            }
+          if(this.LeftData.seltdVal == link.menuVal){
+
+            document.getElementById("left-panel-menu-slctn").value = this.LeftData.links[linkIndex+1].menuVal;
           }
         }
-        //alert(document.getElementById("left-panel-menu-slctn").value);
-        //alert(document.getElementById("left-panel-subMenu-slctn").value);
         document.getElementById("forwardbutton").click();
+      },
+      updatteAllQuestions:function(){
+
+        if (!Object.entries) {
+           Object.entries = function( obj ){
+             var ownProps = Object.keys( obj ),
+                 i = ownProps.length,
+                 resArray = new Array(i); // preallocate the Array
+             while (i--)
+               resArray[i] = [ownProps[i], obj[ownProps[i]]];
+             
+             return resArray;
+           };
+         }
+
+        var totalQuestions = 0;
+        var totalAnswered = 0;
+
+        for(let [linkIndex,link] of Object.entries(this.LeftData.links)){
+          linkIndex = Number(linkIndex);
+            totalQuestions += Number(link.totalQues);
+            totalAnswered += Number(link.initialQAnsd);
+        }
+
+        this.$parent.setTotalQuestions(totalAnswered,totalQuestions);//calling parent
+
       }
     },
   });

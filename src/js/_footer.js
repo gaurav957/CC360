@@ -4,12 +4,15 @@ Vue.component("footer-panel", {
   data: function () {
     return {
       nextEnable: true,
-      prevEnable: true
+      prevEnable: true,
+      intialQuestions:0,
+      totalQuestions:0
     }
   },
   template: `<div class="footer clearfix">
   <div class="navigation-block clearfix">
-	  <div class="right">
+    <div class="right">
+      <span class="tt-ans"><span v-html="footerData.ttlCnt"></span> <span v-html="this.intialQuestions"></span>/<span v-html="this.totalQuestions"></span></span>
 		   <div class="btn-item pre" :class="prevEnable == true?'':'disable'" v-html=footerData.prevTxt @click="prevEnable == true?PrevPage():''" ></div>
 		   <div class="btn-item frw" :class="nextEnable == true?'':'disable'" v-html=footerData.forwardTxt @click="nextEnable == true?nextPage(footerData.forwardVal):''"></div>
 	  </div>
@@ -18,20 +21,20 @@ Vue.component("footer-panel", {
 </div>`,
   methods: {
     nextPage:function(){
-      // document.getElementById("navText").value = forwardBtnVal;
-      // document.getElementById("forwardbutton").click();
       this.$parent.NextPageBtnClckParent();//calling parent
     },
     PrevPage:function(){
       this.$parent.PrevPageBtnClckParent();//calling parent
     },
     disablePrev:function(){
-      console.log("disable prev false");
       this.prevEnable = false;
     },
     disableNext:function(){
-      console.log("disable next false");
       this.nextEnable = false;
+    },
+    setAllQuestions:function(totalAnswered,totalQuestions){
+      this.intialQuestions = totalAnswered;
+      this.totalQuestions = totalQuestions
     }
   }
 });
