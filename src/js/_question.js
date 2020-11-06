@@ -366,10 +366,7 @@ Vue.component("progress-panel", {
                     <span v-html='progressData.answrdQues'>1</span>
                     <span v-html='progressData.of'>of</span>
                     <span v-html='progressData.totalQues'>12</span>
-                    <span>(</span>
-                    <span v-html='progressData.percentge'>12</span>
-                    <span>%</span>
-                    <span>)</span>
+                    <span>(</span><span v-html='progressData.percentge'>12</span><span>%</span><span>)</span>
                 </div>
                 <div class='progress-bar'>
                     <div id="myProgress">
