@@ -117,15 +117,6 @@ Vue.component("right-panel", {
         .forEach((elem) => elem.classList.remove("tooltip-show"));
     });
 
-    document.querySelectorAll(".custom-infoicon").forEach((elem) => {
-      // console.log(elem);
-      elem.addEventListener("blur", () => {
-        console.log("fsdf");
-        document
-          .querySelectorAll(".tooltip-show")
-          .forEach((elem) => elem.classList.remove("tooltip-show"));
-      });
-    });
   },
   methods: {
     openAccordion: function (e) {
@@ -161,9 +152,9 @@ Vue.component("right-panel", {
       this.updateProgressData();
       document.getElementById(e.target.value).click();
     },
-
+    
     handleInput: function (question, catType, quesIndex, optionIndex, e) {
-      // debugger;
+      
       console.log(question.maxRange, question.minRange);
       let { type, maxLength, selectedId } = question;
       let val, valArr;
@@ -179,7 +170,18 @@ Vue.component("right-panel", {
       if (type == "txt") {
         val = e.target.value;
         valArr = val.split("");
-        valArr = valArr.filter((ch) => /^[a-zA-Z\s]*$/.test(ch));
+        for (let i = 0; i < valArr.length; i++) {
+          const ch = valArr[i];
+          if(ch==' '){
+            valArr.splice(i,1);
+            console.log(valArr)
+          }else{
+            break;
+          }
+        }
+        
+          valArr = valArr.filter((ch) => /^[a-zA-Z\s]*$/.test(ch));
+        
       }
 
       if (Number(valArr.join("")) > question.maxRange) {

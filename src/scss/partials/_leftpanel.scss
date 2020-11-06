@@ -28,15 +28,17 @@
     li{
       position: relative;
       .nav-item{
-        padding:15px;
+        // padding:15px;
         span:first-child{
           // padding-right: 50px;
           // display: block;
           display: inline-block;
-          width: calc(100% - 35px);
+          width: calc(100% - 45px);
         }
         .rt-prgs {
-          float: right;
+          position: absolute;
+          top: 20px;
+          right: 15px;
           .plus-icon{
             margin-left: 5px;
             display: inline-block;
@@ -104,6 +106,7 @@
     font-weight: normal;
     border-left: 5px solid transparent;
     cursor: pointer;
+    position:relative;
     &.selected {
       color: $selectd;
       border-color: #2251FF;

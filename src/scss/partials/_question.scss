@@ -76,9 +76,9 @@
         .tooltips {
           float: right;
           margin-right: 10px;         
-            position: absolute;
-            right: 0;
-            top: 13px;          
+          position: absolute;
+          right: 0;
+          top: 13px;          
         }
       }
     }
@@ -124,6 +124,14 @@
           width: 50%;
           display: table-cell;
           vertical-align: middle;
+          position: relative;
+          & >span{
+            &:first-child{
+              padding-right: 35px;
+              display: inline-block;
+            }
+           
+          }
         }
         .input-box {
           width: 90%;
@@ -139,6 +147,9 @@
         .tooltips {
           float: right;
           margin-right: 10px;
+          position: absolute;
+          right: 0;
+          top: 13px;  
         }
       }
     }
@@ -235,9 +246,23 @@
     top: 150%;
     left: -50%;
     margin-left: -60px;
-    @media (max-width: 767px) {
-      left: 0;
-      margin-left: -120px;
+    // @media (max-width: 767px) {
+    //   left: 0;
+    //   margin-left: -120px;
+    // }
+    // @media (max-width: 480px) {
+    //   left: 50%;
+    //   margin-left: 0;
+    //   transform: translateX(-50%);
+    // }
+
+    @media (min-width: 320px) and (max-width: 1024px) {
+      left: 50%;
+      margin-left: 0;
+      transform: translateX(-50%);
+      bottom: 150%;
+      top: auto;
+      width: 220px;
     }
 
     &::after {
@@ -250,10 +275,17 @@
       border-width: 6px;
       border-style: solid;
       border-color: $black transparent transparent transparent;
-      @media (max-width: 767px) {
-        top: -12px;
-        right: 24px;
-        margin-left: 44px;
+      // @media (min-width:481px) and (max-width: 767px) {
+      //   top: -12px;
+      //   right: 24px;
+      //   margin-left: 44px;
+      // }
+      @media (min-width:320px) and (max-width: 1024px) {
+        bottom: -12px;
+        top:auto;
+        transform: rotate(0deg);
+        // right: 24px;
+        // margin-left: 44px;
       }
     }
   }
@@ -353,10 +385,10 @@
   //  height: calc(100vh - 300px);
   .scrollable{
     padding-right: 25px;
-    height: calc(100vh - 250px);
+    height: calc(100vh - 290px);
     overflow-y: auto;
     @media (max-width:1024px){
-        height: calc(100vh - 280px);
+        height: calc(100vh - 330px);
     }
     @media (max-width:480px){
         padding-right: 16px;
