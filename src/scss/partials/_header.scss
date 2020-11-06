@@ -271,6 +271,11 @@
       padding-left: 15px;
       padding-right: 18px;
     }
+    .question-footer{
+      @media (max-width:767px){
+       float: none!important;
+      }
+    }
   }
    .copyright-block{
     width: 100%;
