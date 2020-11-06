@@ -111,6 +111,11 @@ Vue.component("right-panel", {
       instance.scroll({ x: 0, y: scrollHeight }, 100);
       // setTimeout(function(){console.log(instance.scroll().position.y)},1000);
     });
+    document.addEventListener("click", () => {
+      document
+        .querySelectorAll(".tooltip-show")
+        .forEach((elem) => elem.classList.remove("tooltip-show"));
+    });
 
     document.querySelectorAll(".custom-infoicon").forEach((elem) => {
       // console.log(elem);
@@ -327,16 +332,21 @@ Vue.component("right-panel", {
       this.$refs.prsPanel.enabDisSubmit(endis); //calling child component
     },
     toltiptoggle: (e) => {
-      //e.preventDefault();\
+      let isClass = false;
+      if (e.target.parentNode.classList.contains("tooltip-show")) {
+        isClass = true;
+      }
 
       document
         .querySelectorAll(".tooltip-show")
         .forEach((elem) => elem.classList.remove("tooltip-show"));
       const list = e.target.parentNode.classList;
-      if (e.target.parentNode.classList.contains("tooltip-show")) {
+      if (isClass) {
         e.target.parentNode.classList.remove("tooltip-show");
       } else {
-        e.target.parentNode.classList.add("tooltip-show");
+        setTimeout(() => {
+          e.target.parentNode.classList.add("tooltip-show");
+        }, 0);
       }
     },
     setScrollHeight: () => {
